@@ -1,14 +1,16 @@
 import React from 'react'
-import Navbar from './Components/Navbar/Navbar'
+import Nav from './Components/Navbar/Navbar'
 import Routing from './Components/Routes/Routing'
+import { Footer } from './Components/Footer/Footer'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 
 const App = () => {
   return (
-    <div>
+    <div className='bg-black min-h-[100vh]'>
       <BrowserRouter>
-      <Navbar/>
-      <Routing/>
+      <Nav/>
+      <Routing/>'
+      <Footer/>
 
       
       </BrowserRouter>
