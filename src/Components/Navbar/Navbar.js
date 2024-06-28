@@ -135,7 +135,7 @@ function NavListMenu() {
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2  pr-4  py-1 font-semibold text-gray-900 text-lg "
+              className="flex items-center gap-2  pr-4  py-1 font-semibold text-gray-900 text-md "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
@@ -180,7 +180,7 @@ function NavList() {
         className="font-medium"
       >
         <Link to='/'>
-          <ListItem className="flex items-center gap-2  pr-4 text-lg  py-1 font-semibold">Home</ListItem>
+          <ListItem className="flex items-center gap-2  pr-4 text-md  py-1 font-semibold">Home</ListItem>
         </Link>
       </Typography>
       <NavListMenu />
@@ -192,7 +192,7 @@ function NavList() {
 
       >
 
-        <ListItem className="flex items-center gap-2 py-1 pr-4 text-lg font-semibold">
+        <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
           About Us
         </ListItem>
       </Typography>
@@ -203,10 +203,11 @@ function NavList() {
         color="blue-gray"
 
       >
-
-        <ListItem className="flex items-center gap-2 py-1 pr-4 text-lg font-semibold">
+          <Link to='/contact'>
+        <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
           Contact Us
         </ListItem>
+          </Link>
       </Typography>
     </List>
   );

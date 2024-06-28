@@ -80,7 +80,7 @@ export default function Signup() {
 
                     }
                     try {
-                      // console.log(process.env.REACT_APP_API_END)
+                     
                         const res = await axios.post(`${process.env.REACT_APP_API_END}/login`, user,{
                             headers:{
                                 'Content-Type':'application/json'
@@ -95,6 +95,7 @@ export default function Signup() {
                             toast.success(res.data.message);
                             console.log(res.data)
                             dispatch(setUser(res.data.user));
+                            // dispatch(setLoading(false));
                             navigate("/");
                         }
                        
