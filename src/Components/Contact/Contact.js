@@ -19,8 +19,8 @@ const Contact = () => {
     setSuccess(true)
     
     emailjs
-      .sendForm('service_0ong2wc', 'template_78wgw2o', form.current, {
-        publicKey: 'I2IeRDtvIDQ9QSlvf',
+      .sendForm(process.env.REACT_APP_SERVICE_KEY, process.env.REACT_APP_TEMPLATE_KEY, form.current, {
+        publicKey: process.env.REACT_APP_PUBLIC_KEY,
       })
       .then(
         () => {
