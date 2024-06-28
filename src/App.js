@@ -4,6 +4,7 @@ import Routing from './Components/Routes/Routing'
 import { Footer } from './Components/Footer/Footer'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 
+
 const App = () => {
   return (
     <div className='bg-black min-h-[100vh]'>
