@@ -18,7 +18,7 @@ const Routing  = () => {
     <div>
       <Toaster />
         <Routes>
-        <Route path= "/" element={ <Home/>}/>
+        <Route path= "/" element={ <Home />}/>
         <Route path= "/contact" element={ <Contact/>}/>
         <Route path= "/signup" element={ <Signup/>}/>
         <Route path= "/dashboard" element={ user? <DashBoard/> : <Home/>}/>

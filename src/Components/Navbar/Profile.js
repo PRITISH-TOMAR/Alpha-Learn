@@ -27,7 +27,7 @@ const Profile = () => {
 
   return (
     <div>
-         <Dropdown className='mt-2'
+         <Dropdown className='mt-2 z-200'
             arrowIcon={false}
             inline
             label={

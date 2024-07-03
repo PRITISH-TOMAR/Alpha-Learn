@@ -40,6 +40,7 @@ import {
   TagIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
+import { Person } from "@mui/icons-material";
 
 const navListMenuItems = [
   {
@@ -302,16 +303,17 @@ export default function Nav() {
 
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
           {
-            user ? 
-            <Button variant="gradient" size="sm" >
-                <img src="https://img.icons8.com/?size=100&id=ywULFSPkh4kI&format=png&color=000000 " alt="" width="50%" height="50%" srcset="" />
-              </Button>
+               user ?
+               <Link to= "dashboard?tab=profile">
 
-
-              :
-              <Button variant="gradient" size="sm" fullWidth>
-                Sign In
-              </Button>
+               <Person />
+               </Link>
+    
+                  : <Link to="signup">
+                    <Button variant="gradient" size="sm" >
+                      Sign In
+                    </Button>
+                  </Link>
 
           }
         </div>

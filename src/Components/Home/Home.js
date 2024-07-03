@@ -3,6 +3,7 @@ import { Button } from '@material-tailwind/react'
 import Banner from "../Essantials/banner.mp4"
 import CodeBlock from './CodeBlock'
 import Highlight from '../Essantials/Highlight'
+import { Link } from 'react-router-dom'
 
 const features = [
   {
@@ -33,7 +34,7 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="bg-black  max-w-[100vw]  pt-[50px]">
+    <div className="bg-black  max-w-[100vw]  pt-[50px] z-5">
       <div className=" mx-auto max-w-7xl px-6 lg:px-8 flex-col items-center justify-center">
         <div className="mx-auto max-w-6xl lg:text-center">
           <h2 className=" text-2xl font-semibold  text-indigo-400">Learn Faster</h2>
@@ -82,9 +83,11 @@ export default function Home() {
             />
            {/* //................................................................................ */}
         </div>
+        <Link to='signup'>
           <Button variant="gradient" size="md" className='my-[40px] '>
             Sign In
           </Button>
+        </Link>
         </div>
         <div className=' flex justify-center  '>
         <video className='video w-[90%] border-2 rounded lg:w-[70%]' 
