@@ -63,7 +63,7 @@ const UserProfile = () => {
     return (
 
 
-        <div className="md:w-[60vw]  min-w-[85vw] bg-black rounded-lg shadow-lg p-6 flex flex-col items-center border-2 text-white">
+        <div className=" bg-black rounded-lg shadow-lg p-6 flex flex-col items-center  text-white">
 
             {/* <div className="flex flex-col md:w-2/3 p-6 items-center  justify-center bg-gray-700"> */}
             <h2 className="text-xl font-semibold mb-4"> {user.fullName}</h2>

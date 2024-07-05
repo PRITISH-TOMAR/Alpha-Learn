@@ -8,5 +8,8 @@ module.exports = withMT({
   
   },
 
-  plugins: [],
+  plugins: [
+    // ...
+    require('flowbite/plugin'), require('tailwind-scrollbar'),
+],
 });

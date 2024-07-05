@@ -53,16 +53,19 @@ const DashBoard = () => {
   }, [location.search]);
 
   return (
-    <div className="min-h-screen flex flex-row  justify-between  bg-black w-full border-2">
+    <div className="min-h-screen flex flex-row  items-between justify-between bg-black max-w-[95vw] w-[95vw] mt-8">
 
-      <div className=' max-w-[15vw]'>
+      <div className=' max-w-[12vw] flex  '>
         <Side />
       </div>
+      <div className='max-w-[82vw] flex min-w-[82vw] w-[82vw] '>
 
-      {tab === 'profile' && <UserProfile />}
+
+      {tab === 'profile' && <UserProfile /> }
       {tab === 'create' &&  <NewArticle/> }
       {tab === 'my-articles' &&  <MyArticles/> }
 
+      </div>
 
 
 

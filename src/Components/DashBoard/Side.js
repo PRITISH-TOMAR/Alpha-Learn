@@ -1,4 +1,5 @@
 import { Sidebar } from 'flowbite-react';
+
 import {
   HiUser,
   HiArrowSmRight,
@@ -35,50 +36,32 @@ const Logout = async () => {
 }
   
   return (
-    <Sidebar  >
-      <Sidebar.Items className='flex justify-center  items-center'  >
-        <Sidebar.ItemGroup className='flex flex-col gap-1  text-gray-200 items-center '>
-        
-          <Link to='/dashboard?tab=profile'>
-            <Sidebar.Item 
-            //   active={tab === 'profile'}
-              icon={HiUser}
-              labelColor='dark'
-              as='div'
-            >
-              <p className='hidden lg:flex text-gray-200 '> Profile </p>
-            </Sidebar.Item>
-          </Link>
-          <Link to='/dashboard?tab=my-articles'>
-          <Sidebar.Item
-            icon={HiArrowSmRight}
-            className='cursor-pointer text-gray-200 '
-            
-          >
-             <p className='hidden lg:flex '> My articles </p>
+    <Sidebar className="max-w-[10vw] md:max-w-[20vw] lg:max-w-[15vw] border-r">
+    <Sidebar.Items className="flex justify-center items-start">
+      <Sidebar.ItemGroup className="flex flex-col gap-1 text-gray-200 items-start">
+        <Link to='/dashboard?tab=profile'>
+          <Sidebar.Item icon={HiUser}  as='div'>
+            <p className='hidden lg:flex text-gray-200'>Profile</p>
           </Sidebar.Item>
-          </Link>
-          {/* <Link to='/dashboard?tab=create'>
-          <Sidebar.Item
-            icon={HiArrowSmRight}
-            className='cursor-pointer'
-            
-          >
-             <p className='hidden lg:flex'> Create a new</p>
+        </Link>
+        <Link to='/dashboard?tab=my-articles'>
+          <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer text-gray-200 ' as='div'>
+            <p className='hidden lg:flex'>My articles</p>
           </Sidebar.Item>
-          </Link> */}
-
-          <Link to='/dashboard?tab=out'>
-          <Sidebar.Item
-            icon={HiArrowSmRight}
-            className='cursor-pointer'
-            onClick={Logout}
-          >
-           <p className='hidden lg:flex text-gray-200 '> SignOut </p>
+        </Link>
+        <Link to='/dashboard?tab=create'>
+          <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer' as='div'>
+            <p className='hidden lg:flex text-gray-200'>Write New</p>
           </Sidebar.Item>
-          </Link>
-        </Sidebar.ItemGroup>
-      </Sidebar.Items>
-    </Sidebar>
+        </Link>
+        <Link to='/dashboard?tab=out'>
+          <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer' onClick={Logout} as='div'>
+            <p className='hidden lg:flex text-gray-200'>SignOut</p>
+          </Sidebar.Item>
+        </Link>
+      </Sidebar.ItemGroup>
+    </Sidebar.Items>
+  </Sidebar>
+  
   );
 }
