@@ -10,7 +10,7 @@ import NewArticle from './NewArticle'
 import Side from './Side';
 import UserProfile from './UserProfile';
 import { useLocation } from 'react-router-dom';
-
+import UpdateArticle from './UpdateArticle';
 
 
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
@@ -53,7 +53,7 @@ const DashBoard = () => {
   }, [location.search]);
 
   return (
-    <div className="min-h-screen flex flex-row  items-between justify-between bg-black max-w-[95vw] w-[95vw] mt-8">
+    <div className="min-h-screen flex flex-row  items-between justify-between bg-black max-w-[97vw] w-[97vw] ">
 
       <div className=' max-w-[12vw] flex  '>
         <Side />
@@ -64,6 +64,7 @@ const DashBoard = () => {
       {tab === 'profile' && <UserProfile /> }
       {tab === 'create' &&  <NewArticle/> }
       {tab === 'my-articles' &&  <MyArticles/> }
+      {tab === 'update' &&  <UpdateArticle/> }
 
       </div>
 
