@@ -28,37 +28,46 @@ const DashBoard = () => {
   const [tab, setTab] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.user);
+  const  user  = useSelector((state) => state.user.user);
 
   const Logout = async () => {
-      try {
-          const res = await axios.get(`${process.env.REACT_APP_API_END}/logout`);
-          if (res.data.success) {
-              toast.success(res.data.message);
-          }
-          dispatch(setUser(null));
-          navigate("/");
-      } catch (error) {
-          console.log(error);
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_API_END}logout`);
+      if(res.data.success){
+          toast.success(res.data.message);
+          dispatch(setUser({}));
+      navigate("/");
       }
+      
+  } catch (error) {
+      console.log(error);
   }
+
+  };
 
 
   useEffect(() => {
+
+    if(!user._id)
+    {
+      navigate("/")
+    }
     const urlParams = new URLSearchParams(location.search);
     const tabFromUrl = urlParams.get('tab');
+ 
     if (tabFromUrl) {
       setTab(tabFromUrl);
     }
   }, [location.search]);
 
+
   return (
     <div className="min-h-screen flex flex-row  items-between justify-between bg-black max-w-[97vw] w-[97vw] ">
 
-      <div className=' max-w-[12vw] flex  '>
+      <div>
         <Side />
       </div>
-      <div className='max-w-[82vw] flex min-w-[82vw] w-[82vw] '>
+      <div className='flex min-w-[82vw] w-[82vw] '>
 
 
       {tab === 'profile' && <UserProfile /> }

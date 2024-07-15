@@ -7,9 +7,12 @@ import {Toaster} from 'react-hot-toast'
 import DashBoard from '../DashBoard/DashBoard'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import ArticleTemplate from '../ArticleTemplate/ArticleTemplate'
 
 
 import React from 'react'
+import Resources from '../Resources/Resources'
+import About from '../About/About'
 
 const Routing  = () => {
   const { user } = useSelector((state) => state.user);
@@ -23,8 +26,12 @@ const Routing  = () => {
         <Route path= "/" element={ <Home />}/>
         <Route path= "/contact" element={ <Contact/>}/>
         <Route path= "/signup" element={ <Signup/>}/>
-        <Route path= "/dashboard" element={ user? <DashBoard/> : <Navigate to ="/" />  }/>
+        {/* <Route path= "/dashboard" element={ user? <DashBoard/> : <Navigate to ="/" />  }/> */}
+        <Route path= "/dashboard" element={  <DashBoard/> }/>
+        <Route path= "/article" element={ <ArticleTemplate/> }/>
 
+        <Route path= "/resources" element={ <Resources/> }/>
+        <Route path= "/about" element={ <About/> }/>
 
         <Route path= "*" element={ <Error/>}/>
 

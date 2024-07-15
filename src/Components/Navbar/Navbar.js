@@ -41,53 +41,38 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { Person } from "@mui/icons-material";
+import { useLocation } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 
 const navListMenuItems = [
+ 
   {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: SquaresPlusIcon,
-  },
-  {
-    title: "About Us",
-    description: "Meet and learn about our dedication",
+    title: "All Topics: Uncategorized",
+    description: "Meet and learn about technology",
     icon: UserGroupIcon,
   },
   {
-    title: "Blog",
-    description: "Find the perfect solution for your needs.",
+    title: "Machine Learning",
+    description: "Explore where ML meets human",
+    icon: UserGroupIcon,
+  },
+  {
+    title: "Data Strucures",description: "Store your data perfectly",
     icon: Bars4Icon,
   },
+
   {
-    title: "Services",
-    description: "Learn how we can help you achieve your goals.",
-    icon: SunIcon,
-  },
-  {
-    title: "Support",
-    description: "Reach out to us for assistance or inquiries",
+    title: "Web Development",description: "Build a site like ours",
     icon: GlobeAmericasIcon,
   },
   {
-    title: "Contact",
-    description: "Find the perfect solution for your needs.",
+    title: "Languages",description: "Choose your favourite language",
     icon: PhoneIcon,
   },
   {
-    title: "News",
-    description: "Read insightful articles, tips, and expert opinions.",
+    title: "Algorithms for DS",description: "Play with the structure, not Algos",
     icon: NewspaperIcon,
-  },
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: RectangleGroupIcon,
-  },
-  {
-    title: "Special Offers",
-    description: "Explore limited-time deals and bundles",
-    icon: TagIcon,
-  },
+  }
 ];
 
 function NavListMenu() {
@@ -95,7 +80,9 @@ function NavListMenu() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const renderItems = navListMenuItems.map(
     ({ icon, title, description }, key) => (
-      <a href="#" key={key}>
+     
+      <Link to= { key!=0 ?`/resources?category=${title}`  : "/resources"} key={key}>
+         
         <MenuItem className="flex items-center gap-3 rounded-lg">
           <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
             {" "}
@@ -120,7 +107,7 @@ function NavListMenu() {
             </Typography>
           </div>
         </MenuItem>
-      </a>
+      </Link>
     ),
   );
 
@@ -185,6 +172,7 @@ function NavList() {
         </Link>
       </Typography>
       <NavListMenu />
+      <Link to = "/about">
       <Typography
         as="a"
         href="#"
@@ -192,18 +180,18 @@ function NavList() {
         color="blue-gray"
 
       >
-
         <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
           About Us
         </ListItem>
       </Typography>
+      </Link>
       <Typography
         as="a"
         href="#"
         variant="small"
         color="blue-gray"
-
-      >
+        
+        >
           <Link to='/contact'>
         <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
           Contact Us
@@ -216,11 +204,12 @@ function NavList() {
 
 export default function Nav() {
   const [openNav, setOpenNav] = React.useState(false);
-  const naviagte = useNavigate()
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const navigate = useNavigate()
   const user = useSelector((store) => store.user.user)
-  console.log(user)
   const loading = useSelector((store) => store.user.isLoading)
   const dispatch = useDispatch();
+  const location = useLocation()
 
 
   React.useEffect(() => {
@@ -228,10 +217,46 @@ export default function Nav() {
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
+    // if(user._id)
+    // console.log(true)
   }, []);
 
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('search');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+    else
+    setSearchTerm('');
+  }, [location]);
+
+  const handleSearch=()=>{
+    
+      const urlParams = new URLSearchParams(location.search);
+      if(searchTerm)
+      {
+
+        urlParams.set('search', searchTerm);
+        const searchQuery = urlParams.toString();
+        navigate(`/resources?search=${searchTerm}`);
+      }
+      else 
+      navigate(`/resources`);
+    
+
+  
+  }
+
+  const handlekey=(e)=>
+  {
+      if (e.key === 'Enter') handleSearch()
+  }
+
+
+
   return (
-    <Navbar className="   max-w-[100vw]  py-2">
+    <Navbar className="   max-w-[100vw] z-20  py-2">
       <div className="flex items-center justify-between text-blue-gray-900 ">
         <div className="flex items-center">
 
@@ -248,17 +273,18 @@ export default function Nav() {
         </div>
 
         <div className="hidden items-center gap-x-2 lg:flex">
-          <div className="relative flex w-full gap-2 md:w-max">
-            <Button size="sm" className="mt-1 flex items-center justify-center w-[30px] h-[30px] rounded-[100%]">
-              s
-            </Button>
-            <Input
+          <div className=" flex items-center  w-full gap-2 md:w-max">
+          <FaSearch onClick={handleSearch} 
+          size={20} className="cursor-pointer"/>
+            <Input onKeyDown={(e)=>handlekey(e)}
               type="search"
               placeholder="Search"
+              value={searchTerm}
+              onChange={(e)=>setSearchTerm(e.target.value)}
               containerProps={{
-                className: "min-w-[150px]",
+                className: "min-w-[150px] bg-gray-200 rounded-[12px]",
               }}
-              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
+              className="!border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -274,7 +300,7 @@ export default function Nav() {
 
         <div className="hidden gap-2 lg:flex">
           {
-            user ?
+            user && user._id ?
            <Profile/>
 
               : <Link to="signup">
@@ -304,7 +330,7 @@ export default function Nav() {
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
           {
                user ?
-               <Link to= "dashboard?tab=profile">
+               <Link to= {`dashboard?user=${user.uniqueName}&tab=profile`}>
 
                <Person />
                </Link>

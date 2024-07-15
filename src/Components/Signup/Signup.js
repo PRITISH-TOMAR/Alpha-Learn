@@ -60,6 +60,25 @@ export default function Signup() {
   const dispatch = useDispatch()
 
 
+function updateUrl() {
+    // Get the current URL
+    const currentUrl = window.location.href;
+
+    // Retrieve the previous URL from the history stack
+    window.history.back();
+
+    // Get the updated URL after navigating back
+    const updatedUrl = window.location.href;
+
+    // Check if the previous URL is different from the current URL
+    if (updatedUrl !== currentUrl) {
+        window.location.replace(updatedUrl);
+    } else {
+      navigate("/")
+    }
+}
+
+// Example usage:
 
   ///////////////////////////////////
 
@@ -96,7 +115,9 @@ export default function Signup() {
                             console.log(res.data)
                             dispatch(setUser(res.data.user));
                             // dispatch(setLoading(false));
-                            navigate("/");
+                            // navigate("/");
+                           updateUrl()
+                        
                         }
                        
                     } catch (error) {

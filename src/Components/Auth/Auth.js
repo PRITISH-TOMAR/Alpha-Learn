@@ -12,15 +12,36 @@ export default function Auth() {
     const auth = getAuth(app)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+
+    function updateUrl() {
+        // Get the current URL
+        const currentUrl = window.location.href;
+    
+        // Retrieve the previous URL from the history stack
+        window.history.back();
+    
+        // Get the updated URL after navigating back
+        const updatedUrl = window.location.href;
+    
+        // Check if the previous URL is different from the current URL
+        if (updatedUrl !== currentUrl) {
+            window.location.replace(updatedUrl);
+        } else {
+          navigate("/")
+        }
+    }
+
+    
     const handleGoogleClick = async()=>{
         const Provider = new GoogleAuthProvider();
         Provider.setCustomParameters({prompt: 'select_account'})
         try{
           const resultsFromGoogle = await signInWithPopup(auth, Provider);
 
-          const user = { fullName: resultsFromGoogle.user.displayName , email:resultsFromGoogle.user.email  ,password: "fhdbbhbuf"};
+          const user = { fullName: resultsFromGoogle.user.displayName , email:resultsFromGoogle.user.email  , profilePicture: resultsFromGoogle.user.photoURL,};
 
-          const res = await axios.post(`${process.env.REACT_APP_API_END}/google`, user,{
+          const res = await axios.post(`${process.env.REACT_APP_API_END}google`, user,{
             headers:{
                 'Content-Type':'application/json'
             },
@@ -32,7 +53,8 @@ export default function Auth() {
             toast.success(res.data.message);
             // console.log(res.data.user)
             dispatch(setUser(res.data.user));
-             navigate('/')
+            //  navigate('/')
+            updateUrl()
           }
         } catch(error){
           console.log('error is ',error);

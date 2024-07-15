@@ -4,51 +4,51 @@ import Banner from "../Essantials/banner.mp4"
 import CodeBlock from './CodeBlock'
 import Highlight from '../Essantials/Highlight'
 import { Link } from 'react-router-dom'
-
-const features = [
-  {
-    name: 'Push to deploy',
-    description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
-    icon: CloudArrowUpIcon,
-  },
-  {
-    name: 'SSL certificates',
-    description:
-      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
-    icon: LockClosedIcon,
-  },
-  {
-    name: 'Simple queues',
-    description:
-      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
-    icon: ArrowPathIcon,
-  },
-  {
-    name: 'Advanced security',
-    description:
-      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
-    icon: FingerPrintIcon,
-  },
-]
+import RandomCard from '../ArticleTemplate/RandomCard'
+import { Category } from '../Essantials/Category'
+import { useSelector } from 'react-redux'
+import Timeline from '../Essantials/Timeline'
+import { TypeAnimation } from 'react-type-animation'
+import Newsletter from '../Essantials/Newsletter'
 
 export default function Home() {
+  const user = useSelector((store) => store.user.user)
+
   return (
     <div className="bg-black  max-w-[100vw]  pt-[50px] z-5">
-      <div className=" mx-auto max-w-7xl px-6 lg:px-8 flex-col items-center justify-center">
+      <div className=" mx-auto max-w-7xl px-6 lg:px-8 flex-col items-center justify-center text-center">
         <div className="mx-auto max-w-6xl lg:text-center">
           <h2 className=" text-2xl font-semibold  text-indigo-400">Learn Faster</h2>
           <p className="mt-2  font-bold  text-gray-300 text-[42px] ">
-            Dive into Algorithms and Build the 
+            
+
+          <TypeAnimation
+            sequence={["  Dive into Algorithms and Build the ", 2000, ""]}
+            repeat={Infinity}
+
+            cursor={true}
+           className='font-semibold text-2xl lg:text-4xl'
+            // style = {
+            //     {
+            //         whiteSpace: "pre-line",
+            //         display:"block",
+            //         overflowX:"hidden",
+            //         fontSize:"16px",
+            //     }
+            // }
+            omitDeletionAnimation={true}
+           />
+          </p>
+          <p className='font-semibold text-2xl lg:text-4xl'>
+            
             <Highlight text = { "Diamond Structure..."}/>
+          </p>
     
 
+          <p className="mt-6 text-lg leading-8 text-gray-500  text-center">
+          Explore our courses and discover the path to your success. Whether you're a beginner looking to start your coding journey or an experienced developer seeking to expand your skills.
           </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600  text-center">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
-          </p>
-
+            
           <div >
            {/* //................................................................................ */}
 
@@ -56,13 +56,25 @@ export default function Home() {
                 position={"lg:flex-row"}
                 heading={
                     <div className=' font-semibold text-2xl lg:text-4xl sm:w-full'>
-                        Unlock Your
-                        <Highlight text={"coding potential"}/>
-                        with our online courses
+                        Unlock Your 
+                        <Highlight text={"coding potential "}/> 
+                        with our endless articles.
                     </div>
+                    
                 }
-                subheading = {
-                    "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
+                subheading = { <>
+                <p>
+
+                    "Our comprehensions are designed and reviwed by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
+                </p>
+                { !user && 
+                <Link to='signup'>
+          <Button variant="gradient" size="md" className='my-[40px] '>
+            Sign In
+          </Button>
+        </Link>
+                }
+                </>
                 }
               
 
@@ -76,21 +88,17 @@ export default function Home() {
     <p>Dedicate yourself to your passion!</p>
     <p>Happy Coding, Love Logic!</p>
 </body>
-</html>
-`}
+</html>`}
                 
                
             />
            {/* //................................................................................ */}
+                   
         </div>
-        <Link to='signup'>
-          <Button variant="gradient" size="md" className='my-[40px] '>
-            Sign In
-          </Button>
-        </Link>
+       
         </div>
-        <div className=' flex justify-center  '>
-        <video className='video w-[90%] border-2 rounded lg:w-[70%]' 
+        <div className=' flex justify-center mt-12 '>
+        <video  className='video w-[90%] border-2 rounded lg:w-[75%] select-none mb-[80px] lg:mb-[130px]' 
             muted
             loop
             autoPlay
@@ -99,25 +107,19 @@ export default function Home() {
             <source  src={Banner} type="video/mp4" />
             </video>
                 </div>
-        <div>
-            
-        </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                    <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                  </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">{feature.description}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+
+                <div className='w-full  flex justify-center lg:h-[600px] lg:min-h-[600px] lg:max-h-[600px]'>
+
+<RandomCard home={true} />
+         </div>
+
+
+                <Category/>
+                <Timeline/>
+       
+      
       </div>
+      <Newsletter/>
     </div>
   )
 }

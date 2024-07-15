@@ -1,22 +1,40 @@
 import { Typography } from "@material-tailwind/react";
+
+
+import { HashLink as Link } from 'react-router-hash-link';
+
+
+import Vision from "../About/Vision"
  
 const SITEMAP = [
   {
     title: "Company",
-    links: ["About Us", "Careers", "Our Team", "Projects"],
+    links: [{ name:"Alpha_Learn", to:"/"}, { name:"NewsLetter", to:"/contact/#news"}, {name:"Contact Us", to:"/contact"}, { name:"Projects", to:"/"}],
   },
   {
-    title: "Help Center",
-    links: ["Discord", "Twitter", "GitHub", "Contact Us"],
+    title: "About Us",
+    links: [{ name:"Our Vision", to:"/about#vision",}, { name:"Our Mission", to:"/about#mission"}, {name:"Our Values", to:"/about#values"}, { name:"Our Team", to:"/about#team"}],
   },
   {
-    title: "Resources",
-    links: ["Blog", "Newsletter", "Free Products", "Affiliate Program"],
+    title: "Articles",
+    links: [{ name:"Machine Learning", to:"/resources?category=Machine Learning"}, { name:"Web Development", to:"/resources?category=Web Development"}, {name:"DSA", to:"/resources?category=Data Structures"}, { name:"Languages", to:"/resources?category=Languages"}],
   },
   {
-    title: "Products",
-    links: ["Templates", "UI Kits", "Icons", "Mockups"],
+    title: "Upcoming",
+    links: [{ name:"Online IDE", to:"/"}, { name:"Careers", to:"/"}, {name:"Code-in-1", to:"/"}, { name:"Visit again", to:"/"}],
   },
+  // {
+  //   title: "Help Center",
+  //   links: ["Discord", "Twitter", "GitHub", "Contact Us"],
+  // },
+  // {
+  //   title: "Resources",
+  //   links: ["Blog", "Newsletter", "Free Products", "Affiliate Program"],
+  // },
+  // {
+  //   title: "Products",
+  //   links: ["Templates", "UI Kits", "Icons", "Mockups"],
+  // },
 ];
  
 const currentYear = new Date().getFullYear();
@@ -24,10 +42,10 @@ const currentYear = new Date().getFullYear();
 export function Footer() {
   return (
     <footer className="relative w-full bg-[#161D29] border-t">
-      <div className="mx-auto w-full max-w-7xl px-8  ">
-        <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 text-white">
+      <div className="mx-auto w-full max-w-7xl  px-12 ">
+        <div className=" mx-auto grid w-full grid-cols-2 gap-y-8 py-12 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 text-white   ">
           {SITEMAP.map(({ title, links }, key) => (
-            <div key={key} className="w-full">
+            <div key={key} className=" w-full mx-auto   flex flex-col lg:items-center text-center">
               <Typography
                 variant="small"
                 color="blue-gray"
@@ -37,13 +55,13 @@ export function Footer() {
               </Typography>
               <ul className="space-y-1">
                 {links.map((link, key) => (
-                  <Typography key={key} as="li" color="blue-gray" className="font-normal text-white opacity-40 hover:opacity-70">
-                    <a
-                      href="#"
+                  <Typography key={key} as="li" color="blue-gray" className="font-normal text-white lg: opacity-40 hover:opacity-70 mx-auto ">
+                    <Link to={link.to} element={link.element}
+                      
                       className="inline-block py-1 pr-2 transition-transform hover:scale-105"
                     >
-                      {link}
-                    </a>
+                      {link.name}
+                    </Link>
                   </Typography>
                 ))}
               </ul>
@@ -59,7 +77,7 @@ export function Footer() {
             Rights Reserved.
           </Typography>
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
-            <Typography as="a" href="#" className="opacity-80 transition-opacity hover:opacity-100">
+            <Typography as="a" className="hover:cursor-pointer opacity-80 transition-opacity hover:opacity-100">
             <svg className="h-5 w-5 hover:fill-white" fill="gray" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fill-rule="evenodd"
@@ -68,7 +86,7 @@ export function Footer() {
                 />
               </svg>
             </Typography>
-            <Typography as="a" href="#" className="opacity-80 transition-opacity hover:opacity-100">
+            <Typography as="a" className="hover:cursor-pointer opacity-80 transition-opacity hover:opacity-100">
             <svg className="h-5 w-5 hover:fill-white" fill="gray" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fill-rule="evenodd"
@@ -78,7 +96,7 @@ export function Footer() {
               </svg>
             </Typography>
         
-            <Typography as="a" href="#" className="opacity-100 transition-opacity hover:opacity-100 hover:fill-white">
+            <Typography as="a" className="hover:cursor-pointer opacity-100 transition-opacity hover:opacity-100 hover:fill-white">
             <svg className="h-5 w-5 hover:fill-white" fill="gray"viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fill-rule="evenodd"
@@ -87,7 +105,7 @@ export function Footer() {
                 />
               </svg>
             </Typography>
-            <Typography as="a" href="#" className=" ">
+            <Typography as="a" className="hover:cursor-pointer  ">
               <svg className="h-5 w-5 hover:fill-white" fill="gray" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fill-rule="evenodd"

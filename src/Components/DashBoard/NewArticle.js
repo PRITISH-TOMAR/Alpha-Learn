@@ -20,19 +20,34 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
 
+
+const categories = [
+  'Algorithms for DS',
+  'Data Structures',
+  'Languages',
+  'Machine Learning',
+  'Web Development',
+];
+
+
 const NewArticle = () => {
 
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [done, setDone] = useState(false)
-  const [formData, setFormData] = useState({});
   const { user } = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({userId:user._id});
 
   const navigate = useNavigate();
 
+
+  
+
   const handleUpdloadImage = async () => {
     try {
+      
+
       if (!file) {
         setImageUploadError('Please select an image');
         return;
@@ -74,9 +89,7 @@ const NewArticle = () => {
     try {
       e.preventDefault();
       setDone(true)
-     const  userId =  user._id 
-
-      setFormData({ ...formData, userId: userId})
+     
       console.log(formData)
 
         const res = await axios.post(`${process.env.REACT_APP_ARTICLE_END}create`,formData, {
@@ -135,17 +148,20 @@ const NewArticle = () => {
 <select id="cars" className='text-lg  h-fit flex flex-1'
 onChange={(e) =>
   setFormData({ ...formData, category: e.target.value })}>
-  <option value="default" >Choose Category</option>
-  <option value="volvo" >Volvo</option>
-  <option value="saab "  >Saab</option>
-  <option value="opel"  >Opel</option>
-  <option value="audi"  >Audi</option>
+
+<option default >Choose Category</option>
+         {categories.map((category) => (
+        <option key={category} value={category}>
+          {category}
+        </option>
+      ))}
 </select>
   
         </div>
         <div className=' md:flex-row lg:flex-row flex flex-col gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-1    '>
           <FileInput 
             type='file'
+            required
             accept='image/*'
             onChange={(e) => setFile(e.target.files[0])}
            />
@@ -191,7 +207,6 @@ onChange={(e) =>
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
-
          
         />
         <Button type='submit' color='green' disabled={done}>

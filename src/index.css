@@ -47,3 +47,49 @@ body {
   .dark .post-content a {
     color: red;
   }
+
+  .link-grey { color: #aaa; } .link-grey:hover { color: #00913b; }
+
+
+  .post-content{
+    border: 2px solid white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+      margin-top: 40px;
+      background-color: #131417;
+      padding: 20px;
+  }
+
+  .invert-image {
+    filter: invert(1);
+  }
+  
+  ::-webkit-scrollbar {
+    background: rgb(90, 85, 89);
+        width: 8px;
+        height: 8px;
+      }
+      
+      /* Style the scrollbar handle */
+      ::-webkit-scrollbar-thumb {
+        background: rgba(177, 248, 230, 0.774);
+        border-radius: 20px;
+  }
+
+
+  tspan
+  {
+    border: 1px solid red;
+  }
+  .sidebar-hidden {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sidebar-visible {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  
