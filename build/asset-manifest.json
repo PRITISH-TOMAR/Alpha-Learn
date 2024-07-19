@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.763f4d6b.css",
+    "main.js": "/static/js/main.410ab8c8.js",
+    "static/media/banner.mp4": "/static/media/banner.bd5277b4fa9c5c859634.mp4",
+    "static/media/Team2.jpg": "/static/media/Team2.7a402d7e29f3428fa423.jpg",
+    "static/media/Team1.jpg": "/static/media/Team1.4deff16c24b954aead7a.jpg",
+    "static/media/sign.jpg": "/static/media/sign.c85bf43d40814e6c7c94.jpg",
+    "static/media/Viss.jpg": "/static/media/Viss.f1a45dd665b2abec9f45.jpg",
+    "static/media/notFound.png": "/static/media/notFound.00b8e1a26f15e35e9adb.png",
+    "static/media/Value.jpg": "/static/media/Value.6e32a1e9379abad2fa44.jpg",
+    "static/media/Alpha.png": "/static/media/Alpha.1270e3b227895d3982c0.png",
+    "static/media/Miss.jpg": "/static/media/Miss.cdca4ef73d642043c940.jpg",
+    "static/media/otp.png": "/static/media/otp.0a0fa2f9c2645e96408f.png",
+    "static/media/TL5.svg": "/static/media/TL5.0623445fcbcbdb5f6f764cf0d076ec5e.svg",
+    "static/media/TL4.svg": "/static/media/TL4.18fb31f7053faa3ef3404b099dd5c7d0.svg",
+    "static/media/TL1.svg": "/static/media/TL1.34b9324a9fc2c174c4cb537c1775170b.svg",
+    "static/media/TL2.svg": "/static/media/TL2.bd62db2a6f8ce09a3e7346c1abf830f8.svg",
+    "static/media/TL3.svg": "/static/media/TL3.6a1ef2e0b9d5be451b935443b38e0abf.svg",
+    "index.html": "/index.html",
+    "main.763f4d6b.css.map": "/static/css/main.763f4d6b.css.map",
+    "main.410ab8c8.js.map": "/static/js/main.410ab8c8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.763f4d6b.css",
+    "static/js/main.410ab8c8.js"
+  ]
+}

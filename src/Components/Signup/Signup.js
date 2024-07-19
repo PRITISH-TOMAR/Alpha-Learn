@@ -160,8 +160,8 @@ export default function Signup() {
           },
           withCredentials: true
         });
-        console.log(user)
-        console.log(res)
+        // console.log(user)
+        // console.log(res)
         if (res.data.success) {
           toast.success(res.data.message);
         }
@@ -293,7 +293,7 @@ export default function Signup() {
                     variant='outlined'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    disabled={verified}
+                    disabled={verified && !login}
 
                   />
                   {!showOtp &&

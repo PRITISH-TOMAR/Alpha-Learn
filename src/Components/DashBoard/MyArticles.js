@@ -20,8 +20,7 @@ import toast from 'react-hot-toast';
 import UpdateArticle from './UpdateArticle';
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
-import { Modal } from 'flowbite-react';
-
+import { Modal, Spinner } from 'flowbite-react';
 ///////////////////////////////////////////////////////////////
 
 
@@ -44,6 +43,7 @@ const MyArticles = () => {
   const [showModal, setShowModal] = useState(false);
   const [todelete, setTodelete] = useState(null); // Track the index of the row to be deleted
   const [deleted, setDeleted] = useState(false); // Track the index of the row to be deleted
+  const [loading, setLoading] = useState(true); // Track the index of the row to be deleted
   const [order, setOrder] = useState('asc');
   const navigate = useNavigate();
   const location = useLocation();
@@ -81,6 +81,7 @@ const MyArticles = () => {
   useEffect(() => {
     const myarticles = async () => {
       try {
+        // console.log("clciked")
         const res = await axios.get(`${process.env.REACT_APP_ARTICLE_END}retrieve?userId=${user._id}&order=${order}`);
         if (res.status) {
           setArticles(res.data.resData);
@@ -155,9 +156,21 @@ const MyArticles = () => {
   };
 
 
+  useEffect(()=>
+  {
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000);
+  }, [])
+
 
   ///////////////////////////////////////////////////////////////
-
+if(loading) 
+  return (
+    <div className='flex justify-center items-center min-w-full min-h-screen'>
+      <Spinner size='xl' />
+    </div>
+  );
 
   return (
     <>
