@@ -114,21 +114,28 @@ function RandomCard( {home}) {
         {articles.map((art, index) => (
           <div key={art.artId}>
             {Math.abs(activeStep - index) <= 2 &&
-             <div className='flex flex-col  sm:flex-row p-3 border-2 border-teal-700 justify-center items-center rounded-tl-3xl rounded-br-3xl text-center bg-gray-200 w-full '>
-             <div className="lg:flex-1 gap-0  flex flex-col justify-center items-center max-h-[320px] h-[320px] min-h-[320px] w-full  mx-auto">
-                 <h2 className='text-2xl text-gray-900 font-semibold'>
+             <div className='flex flex-col md:flex-row p-3  border-teal-700 justify-between items-center rounded-tl-3xl rounded-br-3xl text-center bg-gray-200 w-full md:max-h-[320px] md:h-[320px] md:min-h-[320px] h-[200px] min-h-[200px] max-h-[200px] '>
+
+
+
+             <div className="lg:flex-1 gap-0  flex md:flex-col  justify-center items-center w-fit  mx-auto md:h-[250px] h-fit overflow-hidden">
+                 <h2 className='md:text-2xl text-xl text-gray-900 font-semibold '>
                     {truncateContent(art.art_name, 3)}
                  </h2>
-                <div  className=' text-gray-700 text-left p-3 lg:max-h-[50%]'
+                <div  className=' text-gray-700 text-left p-3 md:block hidden lg:max-h-[50%]'
            dangerouslySetInnerHTML={{ __html: truncateContent(art.content, 20)}}>
                 </div>
-                 <Button variant='gradient' size='sm' className='text-white'
+                 <Button variant='gradient' size='sm' className='text-white hidden md:block'
                  onClick={(e)=> {showArticle(art.artId)}}>
                     Visit page
                  </Button >
              </div>
-             <div className="p-7 flex-1 h-[70%] max-h-[50px] lg:max-h-[250px] truncate hidden md:flex ">
-                 <img src={art.image} />
+             <div className="flex-1 flex flex-col  justify-center items-center   mx:auto max-h-[140px] md:max-h-[250px] md:h-[250px] gap-2   overflow-hidden md:w-fit  w-[90%]">
+                 <img src={art.image}  className='rounded-[14px] md:max-h-none max-h-[80px] w-full h-full' />
+                 <Button variant='gradient' size='sm' className='text-white md:hidden block'
+                 onClick={(e)=> {showArticle(art.artId)}}>
+                    Visit page
+                 </Button >
              </div>
          </div>
             }

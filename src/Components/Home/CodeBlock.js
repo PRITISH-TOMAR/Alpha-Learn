@@ -6,7 +6,7 @@ const CodeBlocks = ({
     position, heading, subheading, codeblock
 }) => {
   return (
-    <div className={`flex ${position}  my-20 items-center  justify-between gap-0 md:gap-10 flex-wrap text-gray-400 `}>
+    <div className={`flex ${position}  my-20 items-center  justify-between gap-6 md:gap-10 flex-wrap text-gray-400 `}>
       
     {/*Section 1*/}
     <div className=' flex flex-col gap-8 md:w-[50%]  items-center justify-center '>

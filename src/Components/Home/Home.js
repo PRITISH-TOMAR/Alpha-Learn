@@ -16,7 +16,7 @@ export default function Home() {
   const user = useSelector((store) => store.user.user)
 
   return (
-    <div className="bg-black  max-w-[100vw]  pt-[50px] z-5">
+    <div className="bg-black  max-w-[100vw]  pt-[50px] z-5 select-none">
       <div className=" mx-auto max-w-7xl px-6 lg:px-8 flex-col items-center justify-center text-center">
         <div className="mx-auto max-w-6xl lg:text-center">
           <h2 className=" text-2xl font-semibold  text-indigo-400">Learn Faster</h2>
@@ -99,7 +99,7 @@ export default function Home() {
        
         </div>
         <div className=' flex justify-center mt-12 '>
-        <video  className='video w-[95%] border-2 rounded lg:w-[75%] select-none mb-[80px] lg:mb-[130px]' 
+        <video  className='video w-full border-2 rounded lg:w-[75%] select-none mb-[80px] lg:mb-[130px] -z-2' 
             muted
             loop
             autoPlay
