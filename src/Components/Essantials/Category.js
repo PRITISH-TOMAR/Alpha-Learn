@@ -56,10 +56,10 @@ export function Category() {
         <div className="mx-auto m-16  sm:mt-20 lg:my-24 " >
           <dl className="grid  grid-cols-1 gap-x-12 gap-y-4  lg:grid-cols-3 lg:gap-y-5 sm:grid-cols-2 ">
             {categories.map((category, key) => (
-               <Card className="w-70 lg:w-85 flex">
-               <CardBody>
+               <Card className="w-70 lg:w-85 flex ">
+                 <div className=" pl-4 pt-4"> {category.icon} </div>
+               <CardBody className="flex flex-col justify-center items-between h-full">
 
-                  {category.icon}
                  <Typography variant="h5" color="blue-gray" className="">
                   {category.title}
                   </Typography>

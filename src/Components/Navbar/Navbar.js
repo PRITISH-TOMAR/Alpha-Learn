@@ -83,7 +83,7 @@ function NavListMenu({ setOpenNav }) {
       <Link
         to={key !== 0 ? `/resources?category=${title}` : "/resources"}
         key={key}
-        onClick={() => setOpenNav(false)} // Close the menu on click
+        onClick={() => {setOpenNav(false); setIsMobileMenuOpen(false)}} // Close the menu on click
       >
         <MenuItem className="flex items-center gap-3 rounded-lg">
           <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
@@ -303,14 +303,16 @@ export default function Nav() {
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
           {user && user._id ? (
             <Link to={`dashboard?user=${user.uniqueName}&tab=profile`}>
-              <Person onClick={()=>setOpenNav(false)}/>
+              <div className="flex gap-2 items-center p-2">
+
+              <Person className="text-black" onClick={()=>setOpenNav(false)}/>
+               <span className="text-black text-md font-semibold"> Profile</span> 
+              </div>
             </Link>
           ) : (
-            <Link to="signup">
-              <Button variant="gradient" size="sm">
+              <Button variant="gradient" size="sm" onClick={() => {setOpenNav(!openNav); navigate("/signup")}}>
                 Sign In
               </Button>
-            </Link>
           )}
         </div>
       </Collapse>
