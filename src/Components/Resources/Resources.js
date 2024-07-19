@@ -61,6 +61,16 @@ const Resources = () => {
   const location = useLocation();
 
   const navigate = useNavigate();
+
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000);
+  }, [])
+
+
 ///////////////////////////////////////////////////////////////
 
 
@@ -335,8 +345,8 @@ const Resources = () => {
 
 
       {loading ?
-      <div className='flex w-full h-full justify-center items-center'>
-        <Spinner size='2xl' />
+        <div className='flex justify-center items-center min-w-[80%] min-h-screen'>
+        <Spinner size='xl' />
       </div>
   :
 <>

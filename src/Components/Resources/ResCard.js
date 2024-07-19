@@ -50,6 +50,8 @@ const ResCard = ({result, showMore, handleShowMore}) => {
         
   return (
    
+
+  
 <div className="mx-auto flex flex-col items-center  mt-4  sm:mt-20 lg:my-4 w-full  min-h-screen ">
  
 
