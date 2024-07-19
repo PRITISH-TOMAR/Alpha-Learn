@@ -10,6 +10,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { MdOutlineFileUpload } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import Highlight from '../Essantials/Highlight';
 
@@ -137,82 +138,93 @@ const UpdateArticle = () => {
       <span className='text-[35px] mb-8'>
         <Highlight text={"Update Article.."} />
       </span>
-      <form className='flex flex-col lg:w-[60%] gap-4 w-[100%] border-2 p-4 bg-[#170908]' onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+      <form className='flex flex-col  lg:w-[80%] gap-4 w-full  mt-4 py-2 bg-gray-300  rounded-[10px] p-1' onSubmit={handleSubmit}>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between '>
           <input
             type='text'
             placeholder='Title'
             required
             id='title'
-            value={formData.art_name}
-            className='flex-1 text-center rounded-[20px] outline-none'
+            className='flex-1 text-start px-5 rounded-[20px] py-1 outline-none'
             onChange={(e) =>
               setFormData({ ...formData, art_name: e.target.value })
             }
+
           />
-          
-          <select
-            id="category"
-            value={formData.category}
-            className='text-lg h-fit flex flex-1'
+
+          <select id="cars" className='text-md py-1 flex flex-1 rounded-[20px] outline-none'
             onChange={(e) =>
-              setFormData({ ...formData,  category: e.target.value })}
-          >
-            <option value=''>Choose Category</option>
+              setFormData({ ...formData, category: e.target.value })}>
+
+            <option default >Choose Category</option>
             {categories.map((category) => (
               <option key={category} value={category}>
                 {category}
               </option>
             ))}
           </select>
+
         </div>
-        <div className='md:flex-row lg:flex-row flex flex-col gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-1'>
+        <div className='flex flex-row  items-center justify-between border-2 border-gray-700 rounded-[8px]  p-1    '>
           <FileInput
             type='file'
+            required
             accept='image/*'
+            className='bg-white border border-gray-500 rounded-[7px]'
             onChange={(e) => setFile(e.target.files[0])}
+
           />
           <Button
             type='button'
             color='black'
-            size='sm'
             outline
             onClick={handleUploadImage}
-            disabled={!!imageUploadProgress}
+            disabled={imageUploadProgress}
+            className={`${imageUploadProgress && 'p-1'}  md:text-[12px] text-[8px] `}
+
+
+
           >
             {imageUploadProgress ? (
-              <div className='w-16 h-16'>
+              <div className='w-8 h-8  '>
                 <CircularProgressbar
                   value={imageUploadProgress}
                   text={`${imageUploadProgress || 0}%`}
                 />
               </div>
-            ) : (
-              'Upload Image'
-            )}
+            ) : <MdOutlineFileUpload size={17} />}
           </Button>
+
         </div>
+
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-        {(
+        {formData.image && (
           <img
             src={formData.image}
             alt='upload'
-            className='w-full h-72 object-cover'
+            className='w-full h-72 object-cover border-2 rounded-[14px] border'
           />
         )}
+
         <ReactQuill
           theme='snow'
           placeholder='Write something...'
-          className='h-72 mb-12 text-white'
+          className='h-72  mb-12 text-white'
           required
-          value={formData.content}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
+
         />
-        <Button type='submit' color='green' disabled={done}>
-          Update
+        <Button type='submit' color='green' disabled={done} className='md:mt-0 mt-7  self-center w-[300px] max-w-full '>
+          Publish
         </Button>
+        {/* {publishError && (
+          <Alert className='mt-5' color='failure'>
+            {publishError}
+          </Alert>
+        )} */}
+
       </form>
     </div>
   );
