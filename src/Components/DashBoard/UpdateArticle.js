@@ -145,6 +145,7 @@ const UpdateArticle = () => {
             placeholder='Title'
             required
             id='title'
+            value={formData.art_name}
             className='flex-1 text-start px-5 rounded-[20px] py-1 outline-none'
             onChange={(e) =>
               setFormData({ ...formData, art_name: e.target.value })
@@ -153,6 +154,7 @@ const UpdateArticle = () => {
           />
 
           <select id="cars" className='text-md py-1 flex flex-1 rounded-[20px] outline-none'
+          value={formData.category}
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })}>
 
