@@ -134,7 +134,7 @@ const UpdateArticle = () => {
 
 
   return (
-    <div className="md:w-[60vw] min-w-[80vw] bg-black rounded-lg shadow-lg p-6 flex flex-col items-center border-2 text-black gap-4">
+    <div className="md:w-[60vw] min-w-[80vw] bg-black rounded-lg shadow-lg p-6 flex flex-col items-center  text-black gap-4">
       <span className='text-[35px] mb-8'>
         <Highlight text={"Update Article.."} />
       </span>
