@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 import moment from 'moment';
 
 export default function Bar({ articles=[], comments=[] }) {
@@ -18,14 +18,16 @@ export default function Bar({ articles=[], comments=[] }) {
         const itemDate = moment(item.updatedAt).format('ddd');
         const index = data.findIndex((d) => d.date === itemDate);
         if (index !== -1) {
-          data[index].count += 1;
+          for (let i = index; i < 7; i++) {
+            data[i].count += 1;
+          }
         }
       });
 
       return data;
     };
-    console.log(comments)
-    console.log(articles)
+    // console.log(comments)
+    // console.log(articles)
 
     const data = getLast7DaysData(articles);
     const pata = getLast7DaysData(comments);
@@ -38,7 +40,7 @@ export default function Bar({ articles=[], comments=[] }) {
   const xLabels = chartData.data.map((d) => d.date);
 
   return (
-    <BarChart
+    <LineChart
       width={500}
       height={300}
       series={[

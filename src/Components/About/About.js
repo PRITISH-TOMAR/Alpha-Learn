@@ -4,6 +4,7 @@ import Team from './Team'
 import Vision from './Vision'
 import Values from './Values'
 import Mission from './Mission'
+import Faq from '../Essantials/FAQ'
 
 const About = () => {
   return (
@@ -13,6 +14,7 @@ const About = () => {
       <Mission/>
       <Values/>
       <Team/>
+      <Faq/>
       
     </div>
   )

@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import Timeline from '../Essantials/Timeline'
 import { TypeAnimation } from 'react-type-animation'
 import Newsletter from '../Essantials/Newsletter'
+import Faq from '../Essantials/FAQ'
 
 export default function Home() {
   const user = useSelector((store) => store.user.user)
@@ -19,29 +20,29 @@ export default function Home() {
       <div className=" mx-auto max-w-7xl px-6 lg:px-8 flex-col items-center justify-center text-center">
         <div className="mx-auto max-w-6xl lg:text-center">
           <h2 className=" text-2xl font-semibold  text-indigo-400">Learn Faster</h2>
-          <p className="mt-2  font-bold  text-gray-300 text-[42px] ">
+          <p className="mt-2  font-bold  text-gray-300  md:text-[42px] ">
             
 
           <TypeAnimation
-            sequence={["  Dive into Algorithms and Build the ", 2000, ""]}
+            sequence={["  Dive into Advanced Algorithms and Build the ", 2000, ""]}
             repeat={Infinity}
 
             cursor={true}
            className='font-semibold text-2xl lg:text-4xl'
-            // style = {
-            //     {
-            //         whiteSpace: "pre-line",
-            //         display:"block",
-            //         overflowX:"hidden",
-            //         fontSize:"16px",
-            //     }
-            // }
+            style = {
+                {
+                    whiteSpace: "pre-line",
+                    display:"block",
+                    overflowX:"hidden",
+                    
+                }
+            }
             omitDeletionAnimation={true}
            />
           </p>
           <p className='font-semibold text-2xl lg:text-4xl'>
             
-            <Highlight text = { "Diamond Structure..."}/>
+            <Highlight text = { "Mind Web..."}/>
           </p>
     
 
@@ -53,7 +54,7 @@ export default function Home() {
            {/* //................................................................................ */}
 
            <CodeBlock
-                position={"lg:flex-row"}
+                position={"md:flex-row"}
                 heading={
                     <div className=' font-semibold text-2xl lg:text-4xl sm:w-full'>
                         Unlock Your 
@@ -98,7 +99,7 @@ export default function Home() {
        
         </div>
         <div className=' flex justify-center mt-12 '>
-        <video  className='video w-[90%] border-2 rounded lg:w-[75%] select-none mb-[80px] lg:mb-[130px]' 
+        <video  className='video w-[95%] border-2 rounded lg:w-[75%] select-none mb-[80px] lg:mb-[130px]' 
             muted
             loop
             autoPlay
@@ -114,11 +115,13 @@ export default function Home() {
          </div>
 
 
-                <Category/>
-                <Timeline/>
+              
        
       
+      <Category />
       </div>
+      <Faq/>
+                <Timeline/>
       <Newsletter/>
     </div>
   )

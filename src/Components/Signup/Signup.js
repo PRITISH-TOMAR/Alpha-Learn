@@ -18,9 +18,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import toast from 'react-hot-toast'
 // ////////////////////////
+import Otp from "./OTP"
 import Auth from '../Auth/Auth';
 // ////////////////////////
-
+import { MdOutlineVerified } from "react-icons/md";
 
 import { useDispatch } from 'react-redux';
 import { setUser } from '../Redux/UserSlice';
@@ -37,8 +38,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link to="/" color="inherit" className='cursor-pointer'>
+        AlphaLearn
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -53,14 +54,22 @@ export default function Signup() {
   const [login, setLogin] = useState(true)
   const [loading, setLoading] = useState(false)
   const [fullName, setFullName] = useState("");
+  const [showOtp, setShowOtp] = useState(false)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
+  const [forgot, setForgot] = useState(false)
+  const [verified, setVerified] = useState(false);
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  function isValidEmail(email) {
+    // Regular expression for basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
-function updateUrl() {
+  function updateUrl() {
     // Get the current URL
     const currentUrl = window.location.href;
 
@@ -72,125 +81,158 @@ function updateUrl() {
 
     // Check if the previous URL is different from the current URL
     if (updatedUrl !== currentUrl) {
-        window.location.replace(updatedUrl);
+      window.location.replace(updatedUrl);
     } else {
       navigate("/")
     }
-}
+  }
 
-// Example usage:
+  // Example usage:
 
   ///////////////////////////////////
 
-  const loginHandler = async (e)  =>
-    {
-      e.preventDefault();
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    // dispatch(setLoading(true));
+    setLoading(true)
+
+    if (login) {
+      //login
+      const user = { email, password };
+      if ((!user.email || !user.password) || (user.email == ' ' || user.password == ' ')) {
+        toast.error("Please fill the required fields");
+        setLoading(false)
+        return
+
+      }
+      try {
+
+        const res = await axios.post(`${process.env.REACT_APP_API_END}/login`, user, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+
+        });
+
+        // console.log(user)
+
+        if (res.data.success) {
+          toast.success(res.data.message);
+          console.log(res.data.user)
+          dispatch(setUser(res.data.user));
+          // dispatch(setLoading(false));
+          // navigate("/");
+          updateUrl()
+
+        }
+
+      } catch (error) {
+        toast.error(error.response.data.message);
+        console.log(error);
+      } finally {
+        // dispatch(setLoading(false));
+        setLoading(false)
+      }
+    } else {
+      //register
       // dispatch(setLoading(true));
-        setLoading(true)
-           
-                  if(login){
-                    //login
-                    const user = {email,password};
-                    if ((!user.email || !user.password ) || ( user.email==' ' || user.password==' ') )
-                      {
-                      toast.error("Please fill the required fields");
-                      setLoading(false)
-                      return
+      setLoading(true)
+      // console.log("SEttong")
+      const user = { fullName, email, password };
+      if (password != cpassword) {
+        toast.error("Password and Confirm Password do not match.");
+        setLoading(false)
+        return
+      }
+      if ((!user.email || !user.password || !user.fullName) || (user.email == " " || user.password == " " || user.fullName == " ")) {
+        toast.error("Please fill the required fields");
+        setLoading(false)
 
-                    }
-                    try {
-                     
-                        const res = await axios.post(`${process.env.REACT_APP_API_END}/login`, user,{
-                            headers:{
-                                'Content-Type':'application/json'
-                            },
-                            withCredentials:true
-                            
-                        });
-            
-                        console.log(user)
-            
-                        if(res.data.success){
-                            toast.success(res.data.message);
-                            console.log(res.data)
-                            dispatch(setUser(res.data.user));
-                            // dispatch(setLoading(false));
-                            // navigate("/");
-                           updateUrl()
-                        
-                        }
-                       
-                    } catch (error) {
-                        toast.error(error.response.data.message);
-                        console.log(error);
-                    } finally {
-                        // dispatch(setLoading(false));
-                        setLoading(false)
-                    }
-                }else{
-                    //register
-                    // dispatch(setLoading(true));
-                    setLoading(true)
-                    // console.log("SEttong")
-                    const user = {fullName, email, password};
-                    if(password != cpassword)
-                      {
-                        toast.error("Password and Confirm Password do not match.");
-                        setLoading(false)
-                        return
-                      } 
-                      if ((!user.email || !user.password || !user.fullName) || ( user.email==" " || user.password==" " || user.fullName ==" ") )
-                        {
-                        toast.error("Please fill the required fields");
-                        setLoading(false)
+        return
 
-                        return
-
-                      }
-                    // console.log(user)
-                    try {
-                        const res = await axios.post(`${process.env.REACT_APP_API_END}/newuser`,user,{
-                            headers:{
-                                'Content-Type':'application/json'
-                            },
-                            withCredentials:true
-                        });
-                        console.log(user)
-                        console.log(res)
-                        if(res.data.success){
-                            toast.success(res.data.message);
-                        }
-                        setLogin(true);
-                    } catch (error) {
-                        toast.error(error.response.data.message);
-                        console.log(error);
-                    } finally{
-                        // dispatch(setLoading(false));
-                        setLoading(false)
-                    }
-                }
-            
-                    setFullName("")
-                    setEmail("")
-                    setPassword("")
-                    setCpassword("")
-                    
-              }
-            
-
-
-    const changetype = () => {
-      setLogin(!login)
+      }
+      // console.log(user)
+      try {
+        const res = await axios.post(`${process.env.REACT_APP_API_END}/newuser`, user, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        });
+        console.log(user)
+        console.log(res)
+        if (res.data.success) {
+          toast.success(res.data.message);
+        }
+        setLogin(true);
+      } catch (error) {
+        toast.error(error.response.data.message);
+        console.log(error);
+      } finally {
+        // dispatch(setLoading(false));
+        setLoading(false)
+      }
     }
-    
+
+    setFullName("")
+    setEmail("")
+    setPassword("")
+    setCpassword("")
+
+  }
+
+  const sendMail = async () => {
 
 
-    return (
-      <ThemeProvider theme={defaultTheme}>
-        <div className='flex items-center justify-center min-h-[100vh]  md:scale-[0.90]'>
+    if (!isValidEmail(email)) {
+      toast.error("Please enter a valid Email!")
+      setEmail('')
+      return;
+    }
+
+    try {
+
+      setShowOtp(true)
+      const res = await axios.post(`${process.env.REACT_APP_EMAIL_END}send`, { email })
+      if (res.status) {
+        toast.success("OTP sent successfully")
+      }
+
+    }
+    catch {
+      toast.error("Recipient Unreachable")
+    }
+  }
+
+
+
+  const changetype = () => {
+    setLogin(!login)
+  }
+
+  const ResetAll = () => {
+    setVerified(false)
+    setEmail('')
+    setPassword('')
+    setCpassword('')
+    setEmail('')
+  }
+
+
+
+  return (
+    <ThemeProvider theme={defaultTheme}>
+
+      <div className='relative z-23 '>
+
+        <div className='flex items-center justify-center min-h-[100vh]  md:scale-[0.90] '>
+          <div className={` ${showOtp ? 'absolute' : 'hidden'} t-0 l-0 `}>
+            <Otp props={{ setShowOtp, showOtp, email, setVerified }} />
+          </div>
           <Grid container component="main" className='lg:max-w-[95vw] flex justify-between  sm:justify-center '>
 
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{
+            <Grid item xs={12} sm={8} md={5} component={Paper} className={`${showOtp ? 'opacity-20' : ''}`} elevation={6} square sx={{
               // mx: 4,
               display: 'flex',
               justifySelf: 'center',
@@ -234,8 +276,8 @@ function updateUrl() {
                     autoComplete="fullName"
                     autoFocus
                     variant='outlined'
-                    value= {fullName}
-                    onChange={(e)=>setFullName(e.target.value)}
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
 
                   />
                   }
@@ -249,10 +291,28 @@ function updateUrl() {
                     autoComplete="email"
                     autoFocus
                     variant='outlined'
-                    value= {email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={verified}
 
                   />
+                  {!showOtp &&
+                    !verified && email && !login &&
+
+                    <Button onClick={() => sendMail()}> Verify</Button>
+
+
+                  }
+
+                  {!showOtp &&
+                    verified && email && !login &&
+
+                    <MdOutlineVerified />
+
+
+                  }
+
+
                   <TextField
                     margin="normal"
                     required
@@ -263,8 +323,8 @@ function updateUrl() {
                     id="password"
                     autoComplete="current-password"
                     variant='outlined'
-                    value= {password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
 
                   />
                   {!login &&
@@ -278,64 +338,67 @@ function updateUrl() {
                       id="cpassword"
                       autoComplete="current-password"
                       variant='outlined'
-                      value= {cpassword}
-                      onChange={(e)=>setCpassword(e.target.value)}
+                      value={cpassword}
+                      onChange={(e) => setCpassword(e.target.value)}
                     />
                   }
                   <div className='flex-col justify-between items-center'>
-                  <div className='flex justify-between items-center mx-2'>
-                    {
-                      !login && 
-                      <FormControlLabel
-                      control={<Checkbox value="remember" color="primary" />}
-                      label="Remember me"
-                      />
-                    }
-                    
-
-                    
-                  <Button
-                    type="submit"
-                    
-                    variant="contained"
-                    sx={{ mt: 2, mb: 2 , width:'40%',
-                     }}
-                  >
-                    
-                    {loading ? "Loading.." : 
-                    (  login ? "Sign In" : "Sign Up" ) }
-                  </Button>
-
-                  {
-                    login && <Auth/>
-                  }
-
-                  </div>
-
-                  <Grid container>
-                    <Grid item xs >
-                      {login && <span variant="body2 " className='text-[#1976D2] underline cursor-pointer'>
-                        Forgot password?
-                      </span>
+                    <div className='flex justify-between items-center mx-2'>
+                      {
+                        !login &&
+                        <FormControlLabel
+                          control={<Checkbox value="remember" color="primary" />}
+                          label="Remember me"
+                        />
                       }
-                    </Grid>
-                    <Grid item>
-                      <span variant="body2 " className='text-[#1976D2] underline cursor-pointer' onClick={changetype}>
 
-                        {login ?
-                          "Don't have an account? Sign Up"
 
-                          : " Already A Customer? SIgn In"
-                          
+
+                      <Button disabled={!verified && !login}
+                        type="submit"
+
+                        variant="contained"
+                        sx={{
+                          mt: 2, mb: 2, width: '40%',
+                        }}
+                      >
+
+                        {loading ? "Loading.." :
+                          (login ? "Sign In" : "Sign Up")}
+                      </Button>
+
+                      {
+                        login && <Auth />
+                      }
+
+                    </div>
+
+                    <Grid container>
+                      <Grid item xs >
+                        {login && <span variant="body2 " disabled={!email} className='text-[#1976D2] underline cursor-pointer'>
+                          Forgot password?
+                        </span>
                         }
-                      </span>
+                      </Grid>
+                      <Grid item>
+                        <span variant="body2 " className='text-[#1976D2] underline cursor-pointer'
+                          onClick={() => { ResetAll(); changetype() }}
+                        >
+
+                          {login ?
+                            "Don't have an account? Sign Up"
+
+                            : " Already A Customer? SIgn In"
+
+                          }
+                        </span>
 
 
+
+                      </Grid>
 
                     </Grid>
-                    
-                  </Grid>
-                        </div>
+                  </div>
                   <Copyright sx={{ mt: 5 }} />
                 </Box>
               </Box>
@@ -355,7 +418,11 @@ function updateUrl() {
               }}
             />
           </Grid>
+
+
         </div>
-      </ThemeProvider>
-    );
-  }
+      </div>
+
+    </ThemeProvider>
+  );
+}

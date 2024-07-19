@@ -19,6 +19,10 @@ import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 import { setUser } from '../Redux/UserSlice';
+import { MdDeleteForever } from "react-icons/md";
+import { FaSignOutAlt } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
+import { FaUserCheck } from 'react-icons/fa6';
 
 export default function UserDetails({user}) {
   const currUser = useSelector((state) => state.user.user);
@@ -30,7 +34,7 @@ export default function UserDetails({user}) {
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ _id:user._id});
+  const [formData, setFormData] = useState({ _id:currUser._id});
   const [updating, setUpdating] = useState(true)
   const [toDelete, setToDelete] = useState('')
   const [edit, setEdit]  = useState(false)
@@ -113,17 +117,19 @@ export default function UserDetails({user}) {
                 } 
             if(updating) 
             {
-                setUpdateUserSuccess("No changes to comiit!")
+                // setUpdateUserSuccess("No changes to comiit!")
+                toast.error("No changes to commit!")
+                // setUpdating(false)
 
                 return;
             }
-           
+           console.log(formData)
             
-            const res = await axios.put(`${process.env.REACT_APP_API_END}/update`, formData);
+            const res = await axios.put(`${process.env.REACT_APP_API_END}update`, formData);
             if (res.status) {
                 // toast.success(res.data.message);
-                setUpdateUserSuccess(res.data.message)
-
+                toast.success(res.data.message)
+                  console.log(res.data.message)
                 dispatch(setUser(res.data.updatedUser));
             }
             // navigate("/");
@@ -165,8 +171,8 @@ export default function UserDetails({user}) {
     }
 
   return (
-    <div className='m px-12 lg:w-fit w-full border max-h-fit lg:min-w-[40vw] md:w-[40vw]
-    bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 rounded-[20px]'>
+    <div className='m px-12 lg:w-fit pb-3 w-full border h-fit md:h-[400px] lg:min-w-[40vw] md:min-w-[80vw] 
+     bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 rounded-[20px]'>
       <h3 className='my-7 text-center font-semibold text-4xl'>Profile</h3>
       <form onSubmit={updateUser} className='flex flex-col gap-4'>
         <input
@@ -178,7 +184,7 @@ export default function UserDetails({user}) {
           disabled={!edit || user._id!==currUser._id}
         />
         <div
-          className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
+          className='relative w-32 h-32 self-center  cursor-pointer shadow-md overflow-hidden rounded-full'
           onClick={() => filePickerRef.current.click()}
         >
           {imageFileUploading && (
@@ -205,11 +211,12 @@ export default function UserDetails({user}) {
           <img 
             src={ formData.profilePicture||user.profilePicture || <Person/>}
             alt='userpic'
-            className={`rounded-full w-full h-full object-cover border-8 border-gray-900 ${
+            className={`rounded-full w-full h-full object-cover border-8 ${
               imageFileUploadProgress &&
               imageFileUploadProgress < 100 &&
               'opacity-60'
-            }`}
+           
+            }    ${ edit ?  'border-gray-200' : ' border-teal-100'}`}
             
           />
         </div>
@@ -230,7 +237,7 @@ export default function UserDetails({user}) {
           placeholder='email'
           defaultValue={user.email}
           onChange={handleChange}
-          disabled={!edit || user._id!==currUser._id}
+          disabled={true}
         />
   
         
@@ -239,35 +246,16 @@ export default function UserDetails({user}) {
       {
           currUser._id ===user._id &&
       <div className='text-red-500 flex justify-between mt-5'>
-        <span onClick={() => setShowModal(true)} className='cursor-pointer'>
-          Delete Account
-        </span>
-        <span onClick={logoutHandler} className='cursor-pointer'>
-          Sign Out
-        </span>
+         <MdDeleteForever className='cursor-pointer' size={25} color='red' onClick={() => setShowModal(true)} />
+        <FaSignOutAlt className='cursor-pointer' size={25} color='orange' onClick={logoutHandler}/>   
          
 
-          <span onClick={()=>{updateUser(); setEdit(!edit)}} className='cursor-pointer'>
-         {edit? "Update" : "Edit"}
-        </span>
+        
+         {edit? <FaUserCheck className='cursor-pointer' size={25} color='blue' onClick={()=>{updateUser(); setEdit(!edit)}}/> :<FaUserEdit className='cursor-pointer' size={25} color='green' onClick={()=>{updateUser(); setEdit(!edit)}}/> }
       
       </div>
       }
-      {updateUserSuccess && (
-        <Alert color='success' className='mt-5'>
-        {updateUserSuccess}
-        </Alert>
-      )}
-      {updateUserError && (
-        <Alert color='failure' className='mt-5'>
-          {updateUserError}
-        </Alert>
-      )}
-      { (
-        <Alert color='failure' className='mt-5'>
-        {updateUserError}
-        </Alert>
-      )}
+      
        <Modal className='relative z-[240] bg-[#ffffff45] pt-[20vh] '
         show={showModal}
         onClose={() => setShowModal(false)}

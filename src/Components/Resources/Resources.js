@@ -1,10 +1,9 @@
 import React from 'react'
-import { Select, TextInput } from 'flowbite-react';
+import { Select, TextInput, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ResCard from './ResCard';
-import {  Spinner } from 'flowbite-react';
 import {
   Card,
   CardHeader,
@@ -15,6 +14,12 @@ import {
   Tooltip,
   IconButton,
 } from "@material-tailwind/react";
+import not from "../Essantials/Images/notFound.png"
+import { MdFilterList } from "react-icons/md";
+import { IoIosCloseCircle } from "react-icons/io";
+///////////////
+import {  Dialog, DialogBackdrop, DialogPanel,} from '@headlessui/react'
+///////////////
 
 const truncateContent = (htmlString, wordLimit) => {
   const div = document.createElement('div');
@@ -33,6 +38,7 @@ const categories = [
   'Web Development',
 ];
 
+///////////////////////////////////////////////////////////////
 
 
 
@@ -44,6 +50,7 @@ const Resources = () => {
     order: 'asc',
     category: '',
   });
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   // console.log(sidebarData);
   // const [posts, setPosts] = useState([]);
@@ -54,6 +61,7 @@ const Resources = () => {
   const location = useLocation();
 
   const navigate = useNavigate();
+///////////////////////////////////////////////////////////////
 
 
   useEffect(() => {
@@ -69,6 +77,7 @@ const Resources = () => {
       order: order,
       category: category,
     });
+///////////////////////////////////////////////////////////////
 
 
     const fetchRsult = async () => {
@@ -85,7 +94,7 @@ const Resources = () => {
           setLoading(false)
         }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     }
 
@@ -96,6 +105,9 @@ const Resources = () => {
 
   }, [location])
   
+
+  ///////////////////////////////////////////////////////////////
+
   const handleShowMore = async () => {
 
     const urlParams = new URLSearchParams(location.search);
@@ -112,10 +124,11 @@ const Resources = () => {
         }
       }
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
 
+///////////////////////////////////////////////////////////////
 
   const handleChange = (e) => {
     if (e.target.id === 'search') {
@@ -130,6 +143,9 @@ const Resources = () => {
       setSidebarData({ ...sidebarData, category });
     }
   };
+
+
+  ///////////////////////////////////////////////////////////////
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -153,24 +169,54 @@ const Resources = () => {
 
 
   }
-
+  
+  ///////////////////////////////////////////////////////////////
 
   const resetAll = () => {
-
+    
     sidebarData.category = ""
     sidebarData.search = ""
     sidebarData.order = ""
     navigate(`/resources`)
-
-
+    
+    
   }
   
-  return (
-    <div className='flex flex-col   lg:flex-row'>
+  ///////////////////////////////////////////////////////////////
 
-      
-      <div className='p-7 border-b md:border-r lg:min-h-screen border-gray-500 border'>
-        <form className='flex lg:flex-col gap-8 text-sm text-gray-200 flex-wrap w-full' onSubmit={handleSubmit}>
+  
+  return (
+    <>
+  
+     <div className=' z-40 relative lg:hidden'>
+
+     
+        <Dialog open={mobileFiltersOpen} onClose={setMobileFiltersOpen} className=" z-40  relative lg:hidden">
+          <DialogBackdrop
+            transition
+            className="fixed inset-0  transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
+          />
+
+          <div className="fixed inset-0 z-40 flex">
+            <DialogPanel
+              transition
+              className="relative ml-auto mt-[58px] rounded-r px-2 rounded-[18px] border-l flex h-full w-full max-w-xs transform flex-col overflow-y-auto bg-gray-900  py-4 pb-12 shadow-xl transition duration-300 ease-in-out data-[closed]:translate-x-full"
+            >
+              <div className="flex items-center justify-between px-4 mb-12">
+                <h2 className="text-lg font-medium text-gray-200">Filters</h2>
+                <button
+                  
+                >
+
+                  <IoIosCloseCircle 
+                  onClick={() => setMobileFiltersOpen(false)}
+                  size={30}
+                  className="   text-gray-400"  />
+                </button>
+              </div>
+
+              {/* Filters */}
+              <form className='flex flex-col gap-8 text-sm text-gray-200 flex-wrap w-full' onSubmit={handleSubmit}>
           <div className='flex  items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
               Search:
@@ -186,8 +232,9 @@ const Resources = () => {
           <div className='flex items-center gap-2'>
             <label className='font-semibold'>Sort:</label>
             <Select onChange={handleChange} value={sidebarData.order} id='order'>
-              <option value='desc' >Latest</option>
               <option default value='asc'>Oldest</option>
+              <option value='desc' >Latest</option>
+              <option value='like'>Popularity</option>
             </Select>
           </div>
           <div className='flex items-center gap-2'>
@@ -205,6 +252,77 @@ const Resources = () => {
       ))}
             </Select>
           </div>
+          <Button type='submit'  className='w-[80%] mx-auto mt-4' color='white' variant='gradient' onClick={()=>setMobileFiltersOpen(false)}>
+            Apply Filters
+          </Button>
+
+          <Button onClick={resetAll} className='w-[80%] mx-auto'  color='white' variant='gradient'>
+            Reset Filters
+          </Button>
+        </form>
+            </DialogPanel>
+          </div>
+        </Dialog>
+        </div>
+        {/* /////////////////////////////////// */}
+  
+   
+  
+  
+    {/* ///////////////////////////////////////////////////////// */}
+    <div className='flex  lg:flex-row flex-col '>
+           {/* ///////////////////////////////////////////////////////// */}
+    <button
+                type="button"
+                onClick={() => setMobileFiltersOpen(true)}
+                className= " w-full flex justify-end p-3  text-gray-400 hover:text-gray-200  lg:hidden"
+              >
+               
+                <MdFilterList aria-hidden="true" size={26} />
+              </button>
+     {/* /////////////////////////////////// */}
+    
+     
+      
+      <div className='p-7 border-b md:border-r lg:min-h-screen border-gray-500 lg:block hidden'>
+
+
+        <form className='lg:flex flex-col hidden gap-8 text-sm text-gray-200 flex-wrap w-full' onSubmit={handleSubmit}>
+          <div className='flex  items-center gap-2'>
+            <label className='whitespace-nowrap font-semibold'>
+              Search:
+            </label>
+            <TextInput
+              placeholder='Search...'
+              id='search'
+              type='text'
+              value={sidebarData.search}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='flex items-center gap-2'>
+            <label className='font-semibold'>Sort:</label>
+            <Select onChange={handleChange} value={sidebarData.order} id='order'>
+              <option default value='asc'>Oldest</option>
+              <option value='desc' >Latest</option>
+              <option value='like'>Popularity</option>
+            </Select>
+          </div>
+          <div className='flex items-center gap-2'>
+            <label className='font-semibold'>Category:</label>
+            <Select className='min-h-fit'
+              onChange={handleChange}
+              value={sidebarData.category}
+              id='category'
+              >
+              <option value={''} default >Uncategorized</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+          {category}
+        </option>
+      ))}
+            </Select>
+          </div>
           <Button type='submit' color='gray' variant='gradient' >
             Apply Filters
           </Button>
@@ -215,13 +333,26 @@ const Resources = () => {
         </form>
       </div>
 
+
       {loading ?
       <div className='flex w-full h-full justify-center items-center'>
         <Spinner size='2xl' />
       </div>
   :
 <>
-      <ResCard result={result} showMore={showMore} handleShowMore={handleShowMore} />
+
+{
+  result.length ?
+  <>
+  
+  <ResCard result={result} showMore={showMore} handleShowMore={handleShowMore} />
+  </>
+  :
+  <div className='flex w-full justify-center items-center flex-col'>
+    <img className='invert' src={not} alt="" />
+    <h1 className='sm:text-4xl text-2xl text-center font-semibold text-red-300'>Oops, No results found !</h1>
+  </div>
+}
 
      
 </>
@@ -231,6 +362,7 @@ const Resources = () => {
 
 
     </div>
+  </>
   )
 }
 

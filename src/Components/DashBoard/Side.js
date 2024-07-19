@@ -1,12 +1,5 @@
 import { Sidebar } from 'flowbite-react';
-import {
-  HiUser,
-  HiArrowSmRight,
-  HiDocumentText,
-  HiOutlineUserGroup,
-  HiAnnotation,
-  HiChartPie,
-} from 'react-icons/hi';
+import {  HiUser, HiArrowSmRight, } from 'react-icons/hi';
 import { MdArticle, MdEdit } from "react-icons/md";
 import { VscThreeBars } from "react-icons/vsc";
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
@@ -27,12 +20,15 @@ export default function Side() {
 
 
 
+  ///////////////////////////////////////////////////////////////
+
+
   useEffect(()=>
     {
         const  url =new URLSearchParams(location.search)
-        const urlUser = url.get('user')
+        let urlUser = url.get('user')
         // const searchQuery = url.toString();
-        if(!urlUser)setUsert(currUser)
+        if(!urlUser)urlUser= currUser.uniqueName
         
        
             
@@ -40,31 +36,28 @@ export default function Side() {
         {
             try
             {
-                if(urlUser)
-                {
+              
 
-                    const res = await axios.get(`${process.env.REACT_APP_API_END}user?user=${urlUser}`)
-                    if(res.status)
-                        {
-                            setUsert(res.data.item);
-                            console.log(res.data.item)
-                        }
-                        else
-                        {
-                          // console.log("Hellod ef")
-                          navigate('/')
-                        }
-                    }
-                    }
+                
+                const res = await axios.get(`${process.env.REACT_APP_API_END}user?user=${urlUser }`)
+                if(res.status)
+                  {
+                    setUsert(res.data.item);
+                    // console.log(res.data.item)
+                  }
+                }
+                    
+                    
             catch(e)
             {
                 console.log(e)
-                navigate('/')
             }
         }
+
             getUser()
     }, [location])
 
+///////////////////////////////////////////////////////////////
 
   const Logout = async () => {
     try {
@@ -81,6 +74,9 @@ export default function Side() {
 
   };
 
+
+  ///////////////////////////////////////////////////////////////
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -91,27 +87,29 @@ export default function Side() {
 
   }
 
+
+  ///////////////////////////////////////////////////////////////
+
   return (
-    <div  className={`h-full    ${showSidebar? 'max-w-0 w-0 ':'max-w-[15vw] flex  '}`} >
-      <button
-        className="lg:hidden  text-white absolute top-[70px] left-4 z-[200]"
-        onClick={toggleSidebar}
-      >
-       <VscThreeBars size={22}/>
-      </button>
-      <Sidebar className={`border-r bg-gray-800 min-h-screen relative lg:max-w-[15vw]  transition-transform duration-200  ${
+    <>
+     <VscThreeBars size={22}  className="lg:hidden  text-white absolute top-[70px] left-4 z-[200]"
+        onClick={toggleSidebar}/>
+    <div  className={`h-full   ${showSidebar? 'max-w-0 w-0 ':'lg:flex hidden  '}`} >
+     
+      
+      <Sidebar className={`border-r bg-gray-800 min-h-screen relative lg:max-w-[14vw]  transition-transform duration-200  ${
           showSidebar
             ? '  translate-x-0 max-w-[50vw] z-[100] block z-[100] max-w-[50vw] '
             : '-translate-x-full lg:translate-x-0 lg:block '
         }`} >
         <Sidebar.Items className="flex justify-center items-start pt-2  ">
-          <Sidebar.ItemGroup className="flex flex-col  ml-1 gap-1 text-gray-200 items-start">
-            <Link to={`/dashboard?user=${usert.uniqueName}&tab=profile`}>
-              <Sidebar.Item icon={HiUser} onClick={toggleSidebar} as='div'>
-                <p className=' lg:flex text-gray-200   hover:text-gray-900'>Profile</p>
+          <Sidebar.ItemGroup className="flex flex-col  ml-1 gap-1   items-start">
+            <Link to={usert._id=== currUser._id ? `/dashboard?tab=profile`:  `/dashboard?user=${usert.uniqueName}&tab=profile`}>
+              <Sidebar.Item className=' hover:text-gray-900 text-gray-200  ' icon={HiUser} onClick={toggleSidebar} as='div'>
+                <p className=''>Profile</p>
               </Sidebar.Item>
             </Link>
-            <Link to={`/dashboard?user=${usert.uniqueName}&tab=my-articles`}>  
+            <Link to={usert._id=== currUser._id ? `/dashboard?tab=my-articles`:  `/dashboard?user=${usert.uniqueName}&tab=my-articles`}>
                         <Sidebar.Item icon={MdArticle} onClick={toggleSidebar} className='hover:text-gray-900  cursor-pointer text-gray-200  ' as='div'>
                 <p className=' lg:flex'> { currUser._id === usert._id && 'My ' }Articles</p>
               </Sidebar.Item>
@@ -134,5 +132,6 @@ export default function Side() {
         </Sidebar.Items>
       </Sidebar>
     </div>
+    </>
   );
 }

@@ -18,6 +18,7 @@ import {
 } from "@material-tailwind/react";
 
 import Highlight from '../Essantials/Highlight';
+import { FaHeart } from 'react-icons/fa';
 
 const truncateContent = (htmlString, wordLimit) => {
   const div = document.createElement('div');
@@ -28,7 +29,17 @@ const truncateContent = (htmlString, wordLimit) => {
 };
 
 
+function DateForm(dateString) {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}
+
 const ResCard = ({result, showMore, handleShowMore}) => {
+          
 
   
     
@@ -40,10 +51,7 @@ const ResCard = ({result, showMore, handleShowMore}) => {
   return (
    
 <div className="mx-auto flex flex-col items-center  mt-4  sm:mt-20 lg:my-4 w-full  min-h-screen ">
-  {/* <div className='lg:text-[40px] text-[30px] mb-6 hidden lg:block'>
-    
-  <Highlight text = { "Dive into our Resources!"} ></Highlight>
-  </div> */}
+ 
 
 <h2 className="hidden font-bold tracking-tight text-center text-gray-200 mt-5 mb-8 lg:block text-[40px] ">
             <TypeAnimation
@@ -60,9 +68,9 @@ const ResCard = ({result, showMore, handleShowMore}) => {
            />
             </h2>
 
-          <dl className="grid  grid-cols-1 gap-x-4 gap-y-4  lg:grid-cols-3 lg:gap-y-5 m-3 ">
+          <dl className="grid lg:flex justify-between  flex-wrap  grid-cols-1 gap-x-4 w-full gap-y-4  md:grid-cols-2 p-3 z-2 ">
             {result.map((res, key) => (
-                <Card className="w-full lg:w-[25vw] border-2 border-[#a7f3f3] transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-gray-100  bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 ">
+                <Card className="w-full sm:max-w-[450px] lg:min-w-[300px] md:w-[40vw] lg:min-w-[310px] lg:mx-0 mx-auto lg:w-[24.5vw] border-2 border-[#a7f3f3] transition-transform duration-200 ease-in-out hover:scale-[1.02] hover:bg-gray-100 relative z-22 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 ">
                 <CardHeader floated={false} color="blue-gray">
                   <img className='h-[150px] max-h-[200px] min-h-[150px] min-w-full border'
                         src = { res.image}
@@ -84,19 +92,8 @@ const ResCard = ({result, showMore, handleShowMore}) => {
                       color="blue-gray"
                       className="flex items-center gap-1.5 font-normal"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="-mt-0.5 h-5 w-5 text-yellow-700"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                     { res.likes} Likes
+                     
+                     { res.numberOfLikes} <FaHeart className='text-red-500'/>
                     </Typography>
                   </div>
                   {/* <Typography color="gray"
@@ -108,7 +105,7 @@ const ResCard = ({result, showMore, handleShowMore}) => {
            # { res.category.toLowerCase()}
            </Button>
                    <span className=' font-normal lowercase' color='black' >
-                   {new Date(res.createdAt).toLocaleDateString()}
+                   {DateForm(new Date(res.createdAt).toLocaleDateString())}
                    </span>
                   
                    
@@ -119,7 +116,7 @@ const ResCard = ({result, showMore, handleShowMore}) => {
                 </CardBody>
                 <CardFooter className="pt-3">
                     <Link to ={`/article?unique=${res.artId}`}>
-                  <Button size="lg" fullWidth={true}>
+                  <Button size="md" fullWidth={true}>
                     Explore Now
                   </Button>
                     </Link>

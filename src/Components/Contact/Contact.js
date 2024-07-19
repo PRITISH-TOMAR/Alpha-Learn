@@ -3,40 +3,61 @@ import { Button } from "@material-tailwind/react";
 import { Textarea } from "flowbite-react";
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 import Team from '../About/Team';
 import Newsletter from "../Essantials/Newsletter"
+import Faq from '../Essantials/FAQ';
+
+
+
+///////////////////////////////////////////////////////////////
 
 const Contact = () => {
 
-  // /////////////////////////////
-
-  const form = useRef();
   const [success, setSuccess] = useState(false)
+  const [formData, setFormData] = useState({name:'', phone:'', message:'', email:''})
 
-  const sendEmail = (e) => {
+
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+ 
+///////////////////////////////////////////////////////////////
+
+
+  const sendEmail = async (e) => {
     e.preventDefault();
 
     if(success == true) return
 
     setSuccess(true)
-    
-    emailjs
-      .sendForm(process.env.REACT_APP_SERVICE_KEY, process.env.REACT_APP_TEMPLATE_KEY, form.current, {
-        publicKey: process.env.REACT_APP_PUBLIC_KEY,
-      })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-          
-          
-          toast.success( "Thanks for Contacting us. ")
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
-      );
+
+
+    try
+    {
+      // console.log(formData)
+      const res = await axios.post (`${process.env.REACT_APP_EMAIL_END}sendmessage`, formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            }
+            }
+
+      )
+
+      if(res.status)
+      {
+        // console.log('SUCCESS!');
+        toast.success( "Thanks for Contacting us. ")
+      }
+
+    }catch(error){ console.log('FAILED...', error.text);}
   };
-  // ...........................
+
+///////////////////////////////////////////////////////////////
+
   return (
     <>
       <section className=" z bg-about-bg text-white py-20 dark:bg-dark lg:py-[120px] lg:px-[8vw] flex items-center justify-center  mx-2" >
@@ -98,7 +119,7 @@ const Contact = () => {
                       Email Address
                     </h4>
                     <p className="text-base text-body-color dark:text-dark-6">
-                        Demoapi1.0@gmail.com
+                        Alphalearn1.0@gmail.com
                     </p>
                   </div>
                 </div>
@@ -106,31 +127,39 @@ const Contact = () => {
             </div>
             <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
               <div className=" rounded-lg bg-cyan-900  text-black p-8 shadow-lg dark:bg-dark-2 sm:p-12  ">
-                <form className="flex flex-col justify-center" ref={form} onSubmit={sendEmail} >
+                <form className="flex flex-col justify-center"  onSubmit={sendEmail} >
                   <input className="h-[45px] mb-6 rounded px-2 outline-none" 
                     required
                     type="text"
-                    name="user_name"
+                    name="name"
                     placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
                   />
                     <input className="h-[45px] mb-6 rounded px-2 outline-none" 
                   required = {true}
                     type="email"
-                    name="user_email"
+                    name="email"
                     placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                      <input className="h-[45px] mb-6 rounded px-2 outline-none" 
                   required
                     type="text"
                     name="phone"
                     placeholder="Your Phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                   />
                      <textarea className=" h-[100px] min-h-[100px] max-h-[100px] mb-6 rounded px-2 outline-none" 
                   required
                     row="6"
                     placeholder="Your Message"
-                    name="details"
+                    name="message"
                     defaultValue=""
+                    value={formData.message}
+                    onChange={handleChange}
                   />
                    <Button variant="gradient" size="md" type="submit" disabled={success}>
                   Send Message

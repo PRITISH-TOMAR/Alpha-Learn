@@ -6,12 +6,12 @@ const CodeBlocks = ({
     position, heading, subheading, codeblock
 }) => {
   return (
-    <div className={`flex ${position} my-20 justify-between gap-10 flex-wrap text-gray-400 `}>
+    <div className={`flex ${position} my-20 justify-between gap-0 md:gap-10 flex-wrap text-gray-400 `}>
       
     {/*Section 1*/}
-    <div className=' flex flex-col gap-8 lg:w-[50%] p-4 '>
+    <div className=' flex flex-col gap-8 md:w-[50%] p-4 '>
         {heading}
-        <div className='text-richblack-300 font-bold text-sm p-4 md:text-lg'>
+        <div className='text-richblack-300 text-center font-bold text-sm md:p-4 p-2 md:text-lg'>
             {subheading}
         </div>
 
@@ -23,7 +23,7 @@ const CodeBlocks = ({
     </div>
 
      {/*Section 2*/}
-     <div className=' h-fit  flex flex-row text-10[px] w-[100%] py-3 lg:w-[400px] glass  bg-gradient-to-r from-black via-gray-900  to-black border-2 rounded-[20px]'> 
+     <div className=' h-fit  flex flex-row text-10[px] w-[100%] py-3 md:w-[300px] lg:w-[400px] glass  bg-gradient-to-r from-black via-gray-900  to-black border-2 rounded-[20px]'> 
         {/*HW -> BG gradient*/}
 
         <div className='text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold
@@ -56,6 +56,7 @@ const CodeBlocks = ({
                     display:"block",
                     overflowX:"hidden",
                     fontSize:"16px",
+                    color:'white'
                 }
             }
             omitDeletionAnimation={true}

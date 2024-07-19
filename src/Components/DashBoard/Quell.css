@@ -1,0 +1,42 @@
+/* custom-quill.css */
+.ql-editor {
+    background-color: #7d8a9b; /* Dark background color */
+    color: white; /* White text color */
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 1rem; /* Padding inside the editor */
+  }
+  
+  .ql-toolbar {
+    background-color: #000000;
+    border-radius: 0.5rem 0.5rem 0 0; /* Rounded corners on the top */
+    color: white;
+    
+    border: 2px solid red;
+  }
+  
+  .ql-container {
+    border: none; /* Remove border */
+  }
+  
+  .ql-editor{
+    color: white; /* Ensure paragraph text is white */
+    font-size: 18px;
+    background: #0e1213;
+
+  }
+ 
+  .ql-editor data-placeholder
+  {
+    color: white;
+  }
+  
+  /* Additional styling to fix the placeholder issue */
+  .ql-container.ql-snow .ql-editor.ql-blank::before {
+    color: white; /* Placeholder text color */
+    opacity: 0.6; /* Optional: Adjust the opacity for better visibility */
+  }
+  
+  .ql-toolbar .ql-picker.ql-header .ql-picker-label {
+    width: 112px; /* Adjust this value as needed */
+  }
+  

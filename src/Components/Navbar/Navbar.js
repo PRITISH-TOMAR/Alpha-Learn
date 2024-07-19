@@ -6,7 +6,7 @@ import Profile from "./Profile";
 /////////////////////////////////////////////
 import { useSelector } from 'react-redux'
 import { setUser, setLoading } from '../Redux/UserSlice';
-
+import Alpha from '../Essantials/Images/Alpha.png'
 import { useDispatch } from 'react-redux';
 ////////////////////////////////////////
 
@@ -43,6 +43,7 @@ import {
 import { Person } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { alpha } from "@mui/material";
 
 const navListMenuItems = [
  
@@ -57,7 +58,7 @@ const navListMenuItems = [
     icon: UserGroupIcon,
   },
   {
-    title: "Data Strucures",description: "Store your data perfectly",
+    title: "Data Structures",description: "Store your data perfectly",
     icon: Bars4Icon,
   },
 
@@ -74,18 +75,18 @@ const navListMenuItems = [
     icon: NewspaperIcon,
   }
 ];
-
-function NavListMenu() {
+function NavListMenu({ setOpenNav }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const renderItems = navListMenuItems.map(
     ({ icon, title, description }, key) => (
-     
-      <Link to= { key!=0 ?`/resources?category=${title}`  : "/resources"} key={key}>
-         
+      <Link
+        to={key !== 0 ? `/resources?category=${title}` : "/resources"}
+        key={key}
+        onClick={() => setOpenNav(false)} // Close the menu on click
+      >
         <MenuItem className="flex items-center gap-3 rounded-lg">
           <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
             {React.createElement(icon, {
               strokeWidth: 2,
               className: "h-6 text-gray-900 w-6",
@@ -108,7 +109,7 @@ function NavListMenu() {
           </div>
         </MenuItem>
       </Link>
-    ),
+    )
   );
 
   return (
@@ -130,13 +131,15 @@ function NavListMenu() {
               Resources
               <ChevronDownIcon
                 strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""
-                  }`}
+                className={`hidden h-3 w-3 transition-transform lg:block ${
+                  isMenuOpen ? "rotate-180" : ""
+                }`}
               />
               <ChevronDownIcon
                 strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""
-                  }`}
+                className={`block h-3 w-3 transition-transform lg:hidden ${
+                  isMobileMenuOpen ? "rotate-180" : ""
+                }`}
               />
             </ListItem>
           </Typography>
@@ -154,10 +157,8 @@ function NavListMenu() {
   );
 }
 
-function NavList() {
 
-
-
+function NavList({ setOpenNav }) {
   return (
     <List className="p-0 lg:mt-0 lg:mb-0 lg:flex-row  text-sm ">
       <Typography
@@ -167,36 +168,26 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <Link to='/'>
-          <ListItem className="flex items-center gap-2  pr-4 text-md  py-1 font-semibold">Home</ListItem>
+        <Link to="/" onClick={() => setOpenNav(false)}>
+          <ListItem className="flex items-center gap-2  pr-4 text-md  py-1 font-semibold">
+            Home
+          </ListItem>
         </Link>
       </Typography>
-      <NavListMenu />
-      <Link to = "/about">
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-
-      >
-        <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
-          About Us
-        </ListItem>
-      </Typography>
+      <NavListMenu setOpenNav={setOpenNav} />
+      <Link to="/about" onClick={() => setOpenNav(false)}>
+        <Typography as="a" href="#" variant="small" color="blue-gray">
+          <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
+            About Us
+          </ListItem>
+        </Typography>
       </Link>
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        
-        >
-          <Link to='/contact'>
-        <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
-          Contact Us
-        </ListItem>
-          </Link>
+      <Typography as="a" href="#" variant="small" color="blue-gray">
+        <Link to="/contact" onClick={() => setOpenNav(false)}>
+          <ListItem className="flex items-center gap-2 py-1 pr-4 text-md font-semibold">
+            Contact Us
+          </ListItem>
+        </Link>
       </Typography>
     </List>
   );
@@ -204,83 +195,71 @@ function NavList() {
 
 export default function Nav() {
   const [openNav, setOpenNav] = React.useState(false);
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const navigate = useNavigate()
-  const user = useSelector((store) => store.user.user)
-  const loading = useSelector((store) => store.user.isLoading)
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const navigate = useNavigate();
+  const user = useSelector((store) => store.user.user);
+  const loading = useSelector((store) => store.user.isLoading);
   const dispatch = useDispatch();
-  const location = useLocation()
-
+  const location = useLocation();
 
   React.useEffect(() => {
     window.addEventListener(
       "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
+      () => window.innerWidth >= 960 && setOpenNav(false)
     );
-    // if(user._id)
-    // console.log(true)
   }, []);
 
   React.useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('search');
+    const searchTermFromUrl = urlParams.get("search");
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
-    }
-    else
-    setSearchTerm('');
+    } else setSearchTerm("");
   }, [location]);
 
-  const handleSearch=()=>{
-    
-      const urlParams = new URLSearchParams(location.search);
-      if(searchTerm)
-      {
+  const handleSearch = () => {
+    const urlParams = new URLSearchParams(location.search);
+    if (searchTerm) {
+      urlParams.set("search", searchTerm);
+      const searchQuery = urlParams.toString();
+      navigate(`/resources?search=${searchTerm}`);
+    } else navigate(`/resources`);
+  };
 
-        urlParams.set('search', searchTerm);
-        const searchQuery = urlParams.toString();
-        navigate(`/resources?search=${searchTerm}`);
-      }
-      else 
-      navigate(`/resources`);
-    
-
-  
-  }
-
-  const handlekey=(e)=>
-  {
-      if (e.key === 'Enter') handleSearch()
-  }
-
-
+  const handlekey = (e) => {
+    if (e.key === "Enter") handleSearch();
+  };
 
   return (
-    <Navbar className="   max-w-[100vw] z-20  py-2">
-      <div className="flex items-center justify-between text-blue-gray-900 ">
-        <div className="flex items-center">
-
-          <img src="https://img.icons8.com/?size=100&id=mpeojql23sni&format=png&color=000000" alt="" className="w-6 h-6 ml-2" />
+    <Navbar className="relative max-w-[100vw] z-300 py-2 ">
+      <div className="flex  items-center justify-between text-blue-gray-900 ">
+        <Link to="/">
+        <div className="flex items-center  gap-1">
+          <img
+            src={Alpha}
+            alt=""
+            className="w-6 h-6 ml-2 rounded object-cover scale-105"
+            />
           <Typography
             as="a"
-            href="#"
+            
             variant="h6"
             className="mr-4 cursor-pointer  lg:ml-2 "
-          >
+            >
             AlphaLearn
-
           </Typography>
         </div>
+            </Link>
 
         <div className="hidden items-center gap-x-2 lg:flex">
           <div className=" flex items-center  w-full gap-2 md:w-max">
-          <FaSearch onClick={handleSearch} 
-          size={20} className="cursor-pointer"/>
-            <Input onKeyDown={(e)=>handlekey(e)}
+            <FaSearch onClick={handleSearch} size={20} className="cursor-pointer" />
+            <Input
+              onKeyDown={(e) => handlekey(e)}
               type="search"
               placeholder="Search"
               value={searchTerm}
-              onChange={(e)=>setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               containerProps={{
                 className: "min-w-[150px] bg-gray-200 rounded-[12px]",
               }}
@@ -290,25 +269,21 @@ export default function Nav() {
               }}
             />
           </div>
-
-
         </div>
         <div className="hidden lg:block">
-          <NavList />
+          <NavList setOpenNav={setOpenNav} />
         </div>
 
-
         <div className="hidden gap-2 lg:flex">
-          {
-            user && user._id ?
-           <Profile/>
-
-              : <Link to="signup">
-                <Button variant="gradient" size="sm" >
-                  Sign In
-                </Button>
-              </Link>
-          }
+          {user && user._id ? (
+            <Profile />
+          ) : (
+            <Link to="signup">
+              <Button variant="gradient" size="sm">
+                Sign In
+              </Button>
+            </Link>
+          )}
         </div>
         <IconButton
           variant="text"
@@ -324,24 +299,19 @@ export default function Nav() {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
-
-
+        <NavList setOpenNav={setOpenNav} />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          {
-               user ?
-               <Link to= {`dashboard?user=${user.uniqueName}&tab=profile`}>
-
-               <Person />
-               </Link>
-    
-                  : <Link to="signup">
-                    <Button variant="gradient" size="sm" >
-                      Sign In
-                    </Button>
-                  </Link>
-
-          }
+          {user && user._id ? (
+            <Link to={`dashboard?user=${user.uniqueName}&tab=profile`}>
+              <Person onClick={()=>setOpenNav(false)}/>
+            </Link>
+          ) : (
+            <Link to="signup">
+              <Button variant="gradient" size="sm">
+                Sign In
+              </Button>
+            </Link>
+          )}
         </div>
       </Collapse>
     </Navbar>

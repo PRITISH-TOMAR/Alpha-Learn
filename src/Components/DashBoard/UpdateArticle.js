@@ -66,6 +66,9 @@ const UpdateArticle = () => {
     
     }, [location.search])
 
+
+    ///////////////////////////////////////////////////////////////
+
   const handleUploadImage = async () => {
     try {
       if (!file) {
@@ -102,6 +105,9 @@ const UpdateArticle = () => {
     }
   };
 
+
+  ///////////////////////////////////////////////////////////////
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setDone(true);
@@ -121,6 +127,10 @@ const UpdateArticle = () => {
       setDone(false);
     }
   };
+
+
+  ///////////////////////////////////////////////////////////////
+
 
   return (
     <div className="md:w-[60vw] min-w-[80vw] bg-black rounded-lg shadow-lg p-6 flex flex-col items-center border-2 text-black gap-4">

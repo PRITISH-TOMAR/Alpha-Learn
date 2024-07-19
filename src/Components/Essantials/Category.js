@@ -31,7 +31,7 @@ import { Link } from "react-router-dom";
   icon: <IoBarChartSharp className='w-8 h-8'/>,
 },
 {
-  title: "Data Strucures",description: "Store your data perfectly",
+  title: "Data Structures",description: "Store your data perfectly",
   icon: <BsDatabaseFillGear className='w-8 h-8'/>,
 },
 

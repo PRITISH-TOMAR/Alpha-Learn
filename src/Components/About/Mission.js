@@ -39,7 +39,7 @@ export default function Mission() {
               <p className="text-base font-semibold leading-7 text-indigo-600">Entire in Alone</p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Entire in Alone</h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
-              OUR MISSION
+                OUR MISSION
               </p>
             </div>
           </div>
@@ -55,8 +55,8 @@ export default function Mission() {
           <div className="lg:pr-4 ">
             <div className="max-w-xl lg:ml-12 text-left text-base leading-7 text-gray-700 lg:max-w-3xl  lg:w-[40vw]">
               <p>
-             
-At  < Highlight text={"Alpha_Learn"} />, our goal is to empower learners through an integrated platform that includes expertly curated articles, a robust coding IDE, and dynamic coding profiles.We strive to make programming knowledge accessible to all by offering engaging articles tailored for learners at every level. Our advanced IDE enhances learning and coding experiences with features designed for efficiency and creativity. Through personalized coding profiles, users can track progress, showcase projects, and connect with a global community of developers. Alphaleran is dedicated to creating a supportive environment where curiosity flourishes, skills are honed, and innovation thrives.
+
+                At  < Highlight text={"Alpha_Learn"} />, our goal is to empower learners through an integrated platform that includes expertly curated articles, a robust coding IDE, and dynamic coding profiles.We strive to make programming knowledge accessible to all by offering engaging articles tailored for learners at every level. Our advanced IDE enhances learning and coding experiences with features designed for efficiency and creativity. Through personalized coding profiles, users can track progress, showcase projects, and connect with a global community of developers. Alphaleran is dedicated to creating a supportive environment where curiosity flourishes, skills are honed, and innovation thrives.
               </p>
               <ul role="list" className="mt-8 space-y-8 text-gray-600">
                 <li className="flex gap-x-3">
@@ -91,13 +91,13 @@ At  < Highlight text={"Alpha_Learn"} />, our goal is to empower learners through
                   </span>
                 </li>
               </ul>
-             
+
             </div>
           </div>
         </div>
       </div>
 
-      
+
     </div>
   )
 }

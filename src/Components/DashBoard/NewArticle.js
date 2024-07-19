@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert,  FileInput, Select, TextInput } from 'flowbite-react';
+import { Alert, FileInput, Select, TextInput } from 'flowbite-react';
 import { Button } from '@material-tailwind/react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -18,7 +18,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
-
+import { MdOutlineFileUpload } from "react-icons/md";
+import './Quell.css'
 
 
 const categories = [
@@ -30,6 +31,11 @@ const categories = [
 ];
 
 
+
+///////////////////////////////////////////////////////////////
+
+
+
 const NewArticle = () => {
 
   const [file, setFile] = useState(null);
@@ -37,16 +43,17 @@ const NewArticle = () => {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [done, setDone] = useState(false)
   const { user } = useSelector((state) => state.user);
-  const [formData, setFormData] = useState({userId:user._id});
+  const [formData, setFormData] = useState({ userId: user._id });
 
   const navigate = useNavigate();
 
 
-  
+///////////////////////////////////////////////////////////////
+
 
   const handleUpdloadImage = async () => {
     try {
-      
+
 
       if (!file) {
         setImageUploadError('Please select an image');
@@ -83,122 +90,126 @@ const NewArticle = () => {
     }
   };
 
+///////////////////////////////////////////////////////////////
 
-  
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       setDone(true)
-     
+
       console.log(formData)
 
-        const res = await axios.post(`${process.env.REACT_APP_ARTICLE_END}create`,formData, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials:true
-        });
-        
-        
-        // navigate("/");
-        
-        if (res.data.success) {
-          // setPublishError(res.data.message);
-          toast.success(res.data.message);
-          navigate("/resources")
+      const res = await axios.post(`${process.env.REACT_APP_ARTICLE_END}create`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true
+      });
 
-          return;
-        }
-        else {
-          // setPublishError(res.data.message);
-          toast.error(res.data.message);
-          
-        }
-        
-        
-       
-      } catch (error) {
-        console.log(error)
-        toast.error('Something went wrong');
+
+      // navigate("/");
+
+      if (res.data.success) {
+        // setPublishError(res.data.message);
+        toast.success(res.data.message);
+        navigate("/resources")
+
+        return;
       }
-      finally{
-        setDone(false)
+      else {
+        // setPublishError(res.data.message);
+        toast.error(res.data.message);
+
       }
-}
+
+
+
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong');
+    }
+    finally {
+      setDone(false)
+    }
+  }
+
+
+  ///////////////////////////////////////////////////////////////
+
 
 
   return (
-    <div className="md:w-[60vw]  min-w-[80vw] bg-black rounded-lg shadow-lg m p-6 flex flex-col items-center border-2 text-black gap-4">    
-     <p className='lg:text-[30px] font-bold text-[20px] text-white'> Write A New Article </p>
-    
-    <form className='flex flex-col lg:w-[60%]  gap-4 w-[100%] border-2 p-4 bg-[#170908]' onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+    <div className=" min-w-full  px-2  rounded-lg shadow-lg py-3 flex flex-col items-center  text-black gap-4">
+
+      <form className='flex flex-col  lg:w-[80%] gap-4 w-full  mt-4 py-2 bg-gray-300  rounded-[10px] p-1' onSubmit={handleSubmit}>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between '>
           <input
             type='text'
             placeholder='Title'
             required
             id='title'
-            className='flex-1 text-center rounded-[20px] outline-none'
+            className='flex-1 text-start px-5 rounded-[20px] py-1 outline-none'
             onChange={(e) =>
               setFormData({ ...formData, art_name: e.target.value })
             }
 
           />
-         
-<select id="cars" className='text-lg  h-fit flex flex-1'
-onChange={(e) =>
-  setFormData({ ...formData, category: e.target.value })}>
 
-<option default >Choose Category</option>
-         {categories.map((category) => (
-        <option key={category} value={category}>
-          {category}
-        </option>
-      ))}
-</select>
-  
+          <select id="cars" className='text-md py-1 flex flex-1 rounded-[20px] outline-none'
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })}>
+
+            <option default >Choose Category</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+
         </div>
-        <div className=' md:flex-row lg:flex-row flex flex-col gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-1    '>
-          <FileInput 
+        <div className='flex flex-row  items-center justify-between border-2 border-gray-700 rounded-[8px]  p-1    '>
+          <FileInput
             type='file'
             required
             accept='image/*'
+            className='bg-white border border-gray-500 rounded-[7px]'
             onChange={(e) => setFile(e.target.files[0])}
-           />
+
+          />
           <Button
             type='button'
             color='black'
-            size='sm'
             outline
             onClick={handleUpdloadImage}
             disabled={imageUploadProgress}
+            className={`${imageUploadProgress && 'p-1'}  md:text-[12px] text-[8px] `}
 
-            
-            
+
+
           >
             {imageUploadProgress ? (
-              <div className='w-16 h-16'>
+              <div className='w-8 h-8  '>
                 <CircularProgressbar
                   value={imageUploadProgress}
                   text={`${imageUploadProgress || 0}%`}
                 />
               </div>
-            ) : (
-              'Upload Image'
-            )}
+            ) : <MdOutlineFileUpload size={17} />}
           </Button>
-          
+
         </div>
-      
+
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
         {formData.image && (
-          <img 
+          <img
             src={formData.image}
             alt='upload'
-            className='w-full h-72 object-cover'
+            className='w-full h-72 object-cover border-2 rounded-[14px] border'
           />
         )}
-    
+
         <ReactQuill
           theme='snow'
           placeholder='Write something...'
@@ -207,9 +218,9 @@ onChange={(e) =>
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
-         
+
         />
-        <Button type='submit' color='green' disabled={done}>
+        <Button type='submit' color='green' disabled={done} className='md:mt-0 mt-7  self-center w-[300px] max-w-full '>
           Publish
         </Button>
         {/* {publishError && (
@@ -218,7 +229,7 @@ onChange={(e) =>
           </Alert>
         )} */}
 
-      </form>      
+      </form>
     </div>
   )
 }

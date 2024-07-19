@@ -1,21 +1,9 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+import axios from 'axios';
 import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
 import emailjs from '@emailjs/browser';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Button } from '@material-tailwind/react';
 
 
 
@@ -25,38 +13,50 @@ export default function Newsletter() {
   const form = useRef();
   const [success, setSuccess] = useState(false)
   const [click, setClick] = useState(false)
+  const [email, setEmail]= useState('')
 
-  const sendEmail = (e) => {
+  
+
+   
+  const sendEmail = async (e) => {
     e.preventDefault();
 
     if(success == true) return
-
     setClick(true)
 
-    // console.log(process.env.REACT_APP_NEWSLETTER_SERVICE_KEY)
-    emailjs
-      .sendForm(process.env.REACT_APP_NEWSLETTER_SERVICE_KEY, process.env.REACT_APP_NEWSLETTER_TEMPLATE_KEY, form.current, {
-        publicKey: process.env.REACT_APP_NEWSLETTER_PUBLIC_KEY,
-      })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-          setSuccess(true)
 
-          
-          
-          toast.success( "Thanks for Contacting us. ")
-        },
-        (error) => {
-          setClick(false)
-          console.log('FAILED...', error);
-        },
-      );
+    setSuccess(true)
+
+
+    try
+    {
+      const res = await axios.post (`${process.env.REACT_APP_EMAIL_END}newsletter`, {email},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            }
+            }
+
+      )
+
+      if(res.status)
+      {
+        console.log('SUCCESS!');
+        setSuccess(true)
+        toast.success( "Thanks for subcribing to us. ")
+      }
+
+    }catch(error){ 
+      setClick(false)
+      console.log('FAILED...', error.text);
+    }
+    
+   
   };
 
 
   return (
-    <div id="news" className="relative isolate overflow-hidden w-full m-0 bg-gray-900 pt-16 sm:py-24 lg:py-32  ">
+    <div id="news" className="relative isolate overflow-hidden w-full m-0 bg-gray-900 pt-16 py-16 lg:py-32  ">
       <div className="mx-auto max-w-7xl px-6 lg:px-8  px-auto">
         <div className="mx-12 grid max-w-2xl grid-cols-1  gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg ">
@@ -64,8 +64,8 @@ export default function Newsletter() {
             <p className="mt-4 text-lg leading-8 text-gray-300">
             Your email is safe with us. We'll never share your information.
             </p>
-              <form ref={form} onSubmit={sendEmail}>
-            <div className="mt-6 flex max-w-md gap-x-4">
+              <form onSubmit={sendEmail}>
+            <div className="mt-6 flex flex-wrap items-center justify-center max-w-md gap-4 flex-row ">
                 
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -79,15 +79,17 @@ export default function Newsletter() {
                 autoComplete="email"
                 name="user_email"
                 disabled={success}
-                className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="min-w-[300px] flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 />
-              <button
+              <Button
                 type="submit" disabled={click || success} 
                 className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                 >
                 {!success ?
                 "Subscribe" : "Subscribed"}
-              </button>
+              </Button>
             </div>
                 </form>
           </div>

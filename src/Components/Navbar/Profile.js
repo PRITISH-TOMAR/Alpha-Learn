@@ -8,6 +8,11 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+
+///////////////////////////////////////////////////////////////
+
+
+
 const Profile = () => {
     const  user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
@@ -27,15 +32,18 @@ const Profile = () => {
         }
     }
 
+
+    ///////////////////////////////////////////////////////////////
+
     return (
-        <div className="relative z-20">
+        <div className="relative z-40">
             <Dropdown
                 className="mt-2 z-30"
                 arrowIcon={true}
                 inline
-                label={<Person />}
+                label={<img src={user.profilePicture} className='w-[40px] h-[40px] rounded-[100%] overflow-hidden '></img>}
             >
-                <Dropdown.Header className="z-30">
+                <Dropdown.Header className="z-30 transition-transform duration-200 ">
                     <span className="block text-sm">{user.fullName}</span>
                     <span className="block text-sm font-medium">
                         {user.email}

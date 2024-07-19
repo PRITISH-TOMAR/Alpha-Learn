@@ -13,6 +13,9 @@ import SwipeableViews from 'react-swipeable-views-react-18-fix';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { useNavigate } from 'react-router-dom';
 
+
+///////////////////////////////////////////////////////////////
+
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const truncateContent = (htmlString, wordLimit) => {
@@ -23,6 +26,10 @@ const truncateContent = (htmlString, wordLimit) => {
     return words+"...";
   };
 
+
+  ///////////////////////////////////////////////////////////////
+
+
 function RandomCard( {home}) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -31,20 +38,27 @@ function RandomCard( {home}) {
 
   const maxSteps = articles.length;
 
+
+  ///////////////////////////////////////////////////////////////
+
   useEffect(() => {
     const myarticles = async () => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_ARTICLE_END}/retrieve?limit=8&ranDom=${true}`);
         if (res.status === 200) {
           setArticles(res.data.resData);
-          console.log(res.data.resData);
+          // console.log(res.data.resData);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     myarticles();
   }, []);
+
+
+  ///////////////////////////////////////////////////////////////
+
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -66,8 +80,12 @@ function RandomCard( {home}) {
   
     }
 
+
+    ///////////////////////////////////////////////////////////////
+
+
   return (
-    <Box className='lg:h-auto h-300px max-h-300px ' sx={{ width:'90vw', flexGrow: 1 , paddingX:5,  bgcolor: 'black'}}>
+    <Box className='lg:h-auto h-300px max-h-300px md:px-[80px] ' sx={{ width:'90vw', flexGrow: 1 ,  bgcolor: 'black'}}>
       <Paper  
         square
         elevation={0}
@@ -95,9 +113,9 @@ function RandomCard( {home}) {
       >
         {articles.map((art, index) => (
           <div key={art.artId}>
-            {Math.abs(activeStep - index) <= 2 ? (
-             <div className='flex flex-col sm:flex-row p-3 border-2 border-teal-700 justify-center items-center rounded-tl-3xl rounded-br-3xl text-center bg-gray-200'>
-             <div className="lg:flex-1 gap-0 justify-center flex flex-col max-h-[320px] h-[320px] min-h-[320px] ">
+            {Math.abs(activeStep - index) <= 2 &&
+             <div className='flex flex-col  sm:flex-row p-3 border-2 border-teal-700 justify-center items-center rounded-tl-3xl rounded-br-3xl text-center bg-gray-200 w-full '>
+             <div className="lg:flex-1 gap-0  flex flex-col justify-center items-center max-h-[320px] h-[320px] min-h-[320px] w-full  mx-auto">
                  <h2 className='text-2xl text-gray-900 font-semibold'>
                     {truncateContent(art.art_name, 3)}
                  </h2>
@@ -109,11 +127,11 @@ function RandomCard( {home}) {
                     Visit page
                  </Button >
              </div>
-             <div className="p-7 flex-1 h-[70%] max-h-[50px] lg:max-h-[250px] truncate hidden lg:flex ">
+             <div className="p-7 flex-1 h-[70%] max-h-[50px] lg:max-h-[250px] truncate hidden md:flex ">
                  <img src={art.image} />
              </div>
          </div>
-            ) : null}
+            }
           </div>
         ))}
 
