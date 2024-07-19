@@ -211,6 +211,7 @@ const UpdateArticle = () => {
           placeholder='Write something...'
           className='h-72  mb-12 text-white'
           required
+          value={formData.content}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
