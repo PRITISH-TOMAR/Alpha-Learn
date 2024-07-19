@@ -160,7 +160,7 @@ const MyArticles = () => {
   {
     setTimeout(() => {
       setLoading(false)
-    }, 3000);
+    }, 2000);
   }, [])
 
 

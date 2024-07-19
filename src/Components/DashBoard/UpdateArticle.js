@@ -167,7 +167,7 @@ const UpdateArticle = () => {
           </select>
 
         </div>
-        <div className='flex flex-row  items-center justify-between border-2 border-gray-700 rounded-[8px]  p-1    '>
+        <div className='flex flex-row h-fit items-center justify-between border-2 border-gray-700 rounded-[8px]  p-1    '>
           <FileInput
             type='file'
             required
@@ -204,14 +204,14 @@ const UpdateArticle = () => {
           <img
             src={formData.image}
             alt='upload'
-            className='w-full h-72 object-cover border-2 rounded-[14px] border'
+            className='w-full h-72 object-cover border-2 rounded-[14px] border '
           />
         )}
 
         <ReactQuill
           theme='snow'
           placeholder='Write something...'
-          className='h-72  mb-12 text-white'
+          className='h-72  mb-12 text-white sm:min-h-fit min-h-[500px]'
           required
           value={formData.content}
           onChange={(value) => {

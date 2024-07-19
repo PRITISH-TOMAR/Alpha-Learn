@@ -13,10 +13,7 @@
     
     border: 2px solid red;
   }
-  
-  .ql-container {
-    border: none; /* Remove border */
-  }
+
   
   .ql-editor{
     color: white; /* Ensure paragraph text is white */
@@ -40,3 +37,7 @@
     width: 112px; /* Adjust this value as needed */
   }
   
+    
+  .ql-container {
+    border: none; /* Remove border */
+  }

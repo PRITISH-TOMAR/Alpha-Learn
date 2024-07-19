@@ -54,7 +54,7 @@ export default function Home() {
            {/* //................................................................................ */}
 
            <CodeBlock
-                position={"md:flex-row"}
+                position={"md:flex-row "}
                 heading={
                     <div className=' font-semibold text-2xl lg:text-4xl sm:w-full'>
                         Unlock Your 
@@ -64,13 +64,13 @@ export default function Home() {
                     
                 }
                 subheading = { <>
-                <p>
+                <p className='text-lg'>
 
                     "Our comprehensions are designed and reviwed by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
                 </p>
-                { !user && 
+                { !user._id  && 
                 <Link to='signup'>
-          <Button variant="gradient" size="md" className='my-[40px] '>
+          <Button variant="gradient" size="lg" className='my-[40px] w-full sm:w-[60%] '>
             Sign In
           </Button>
         </Link>

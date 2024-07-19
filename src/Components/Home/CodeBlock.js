@@ -6,20 +6,16 @@ const CodeBlocks = ({
     position, heading, subheading, codeblock
 }) => {
   return (
-    <div className={`flex ${position} my-20 justify-between gap-0 md:gap-10 flex-wrap text-gray-400 `}>
+    <div className={`flex ${position}  my-20 items-center  justify-between gap-0 md:gap-10 flex-wrap text-gray-400 `}>
       
     {/*Section 1*/}
-    <div className=' flex flex-col gap-8 md:w-[50%] p-4 '>
+    <div className=' flex flex-col gap-8 md:w-[50%]  items-center justify-center '>
         {heading}
-        <div className='text-richblack-300 text-center font-bold text-sm md:p-4 p-2 md:text-lg'>
+        <div className='text-richblack-300 text-center font-bold text-sm md:px-4 p-2 md:text-lg'>
             {subheading}
         </div>
 
-        <div className='flex gap-7 mt-7 p-3'>
-           
-        </div>
-
-
+      
     </div>
 
      {/*Section 2*/}
