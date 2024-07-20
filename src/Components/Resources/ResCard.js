@@ -52,7 +52,7 @@ const ResCard = ({result, showMore, handleShowMore}) => {
    
 
   
-<div className="mx-auto flex flex-col items-center justify-center border  mt-4  sm:mt-20 lg:my-4 w-full  min-h-screen ">
+<div className="mx-auto flex flex-col items-center justify-center   mt-4  sm:mt-20 lg:my-4 w-full  min-h-screen ">
  
 
 <h2 className="hidden font-bold tracking-tight text-center text-gray-200 mt-5 mb-8 lg:block text-[40px] ">
@@ -70,7 +70,7 @@ const ResCard = ({result, showMore, handleShowMore}) => {
            />
             </h2>
 
-          <dl className="grid lg:flex justify-start border-2  flex-wrap  grid-cols-1 gap-x-4  gap-y-4  md:grid-cols-2 p-3 z-2 ">
+          <dl className="grid lg:flex justify-start  place-items-center flex-wrap  grid-cols-1 gap-x-4  gap-y-4  md:grid-cols-2 p-3 z-2 ">
             {result.map((res, key) => (
                 <Card className="w-full sm:max-w-[450px] lg:min-w-[300px] md:w-[40vw] lg:min-w-[310px] lg:mx-0 mx-auto lg:w-[24.5vw] border-2 border-[#a7f3f3] transition-transform duration-200 ease-in-out hover:scale-[1.02] hover:bg-gray-100 relative z-22 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 ">
                 <CardHeader floated={false} color="blue-gray">
