@@ -56,8 +56,7 @@ const UserProfile = () => {
     }
 
     ///////////////////////////////////////////////////////////////
-
-
+   
     useEffect(() => {
         const url = new URLSearchParams(location.search)
         let urlUser = url.get('user')

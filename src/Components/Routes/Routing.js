@@ -16,7 +16,7 @@ import About from '../About/About'
 
 const Routing  = () => {
   const  user  = useSelector((state) => state.user.user);
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
 
   return (
@@ -26,8 +26,8 @@ const Routing  = () => {
         <Route path= "/" element={ <Home />}/>
         <Route path= "/contact" element={ <Contact/>}/>
         <Route path= "/signup" element={ <Signup/>}/>
-        <Route path= "/dashboard" element={ user && user._id? <DashBoard/> : <Navigate to ="/" />  }/>
-        {/* <Route path= "/dashboard" element={  <DashBoard/> }/> */}
+        {/* <Route path= "/dashboard" element={ (user && user._id)? <DashBoard/> : <Navigate to ="/" />  }/> */}
+        <Route path= "/dashboard" element={  <DashBoard/> }/>
         <Route path= "/article" element={ <ArticleTemplate/> }/>
 
         <Route path= "/resources" element={ <Resources/> }/>
