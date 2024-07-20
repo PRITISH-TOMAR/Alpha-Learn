@@ -141,13 +141,13 @@ const UserProfile = () => {
     return (
         <>
             <div className='p-3   w-full   gap-6 flex flex-wrap flex-col overflow-hidden'>
-                <div className=' mx-auto w-full md:gap-2 mb-4 flex flex-row md:justify-between justify-center  items-center flex-wrap h-fit '>
-                    <div className='md:min-w-fit min-w-full' >
+                <div className=' mx-auto w-full  md:gap-2 mb-4 flex flex-row  justify-center  items-center flex-wrap h-fit '>
+                    <div className='md:min-w-fit min-w-full  ' >
                     <UserDetails   user={user} />
                         
                     </div>
                     <div className='flex-wrap flex flex-col justify-start items-center border md:w-[80vw] w-full lg:w-[40vw] h-fit p-3 md:gap-2 gap-4 lg:h-full md:my-0 my-12 pb-6
-            bg-gradient-to-r from-gray-200 via-purple-200 to-pink-200 rounded-[20px]'>
+            bg-gradient-to-r from-gray-200 via-purple-200 to-pink-200 rounded-[20px] min-h-[400px] '>
                         <h3 className='mt-7 mb-2 text-center font-semibold md:text-2xl lg:text-4xl text-3xl'>Recent Activites</h3>
 
                         <div className='flex flex-col border p-2 mx-auto dark:bg-slate-800   w-[98%] md:w-[90%] rounded-md shadow-md bg-teal-100 my-auto'>

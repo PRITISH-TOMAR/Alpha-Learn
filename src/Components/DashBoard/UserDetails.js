@@ -171,8 +171,8 @@ export default function UserDetails({user}) {
     }
 
   return (
-    <div className='m px-12 lg:w-fit pb-3 w-full border h-fit md:h-[400px] lg:min-w-[40vw] md:min-w-[80vw] 
-     bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 rounded-[20px]'>
+    <div className='m px-12 lg:w-fit pb-3 w-full border h-fit md:min-h-[400px] lg:min-w-[40vw] md:min-w-[80vw] 
+     bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 rounded-[20px] '>
       <h3 className='my-7 text-center font-semibold text-4xl'>Profile</h3>
       <form onSubmit={updateUser} className='flex flex-col gap-4'>
         <input

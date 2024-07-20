@@ -62,12 +62,12 @@ const DashBoard = () => {
 
 
   return (
-    <div className="min-h-screen flex flex-row  items-between justify-between bg-black max-w-full  justify-center ">
+    <div className="min-h-screen flex lg:flex-row flex-col  items-between justify-between bg-black max-w-full  justify-center ">
 
-      <div>
+      <div >
         <Side />
       </div>
-      <div className='flex  md:w-[85vw] w-full md:pt-0 pt-8'>
+      <div className='flex  lg:w-[85vw] justify-center items-center  md:pt-0 pt-8'>
 
 
       {tab === 'profile' && <UserProfile /> }

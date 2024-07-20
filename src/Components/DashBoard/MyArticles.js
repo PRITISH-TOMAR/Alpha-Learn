@@ -85,6 +85,7 @@ const MyArticles = () => {
         const res = await axios.get(`${process.env.REACT_APP_ARTICLE_END}retrieve?userId=${user._id}&order=${order}`);
         if (res.status) {
           setArticles(res.data.resData);
+          setLoading(false)
           if (res.data.resData.length < 9) setShowMore(false);
         }
       } catch (error) {
@@ -156,13 +157,7 @@ const MyArticles = () => {
   };
 
 
-  useEffect(()=>
-  {
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000);
-  }, [])
-
+ 
 
   ///////////////////////////////////////////////////////////////
 if(loading) 

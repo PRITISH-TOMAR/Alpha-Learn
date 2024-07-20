@@ -213,7 +213,7 @@ const NewArticle = () => {
         <ReactQuill
           theme='snow'
           placeholder='Write something...'
-          className='h-72  mb-12 text-white '
+          className='h-72  mb-12 text-white  sm:min-h-fit min-h-[500px]'
           required
           onChange={(value) => {
             setFormData({ ...formData, content: value });

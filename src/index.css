@@ -105,13 +105,14 @@ tspan {
 .post-content {
   border-radius: 20px;
   box-shadow: 0 8px 12px rgba(69, 66, 66, 0.655);
-
+overflow-x: auto;
   display: flex;
   align-items: center;
   margin-top: 40px;
   background-color: #131417;
   padding: 20px;
-  user-select: none;
+  /* user-select: none; */
+  max-width: 100%;
 }
 
 

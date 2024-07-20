@@ -75,11 +75,11 @@ export default function Team() {
           </p>
         </div>
 
-        <ul role="list" className="grid  lg:grid-cols-3  w-full gap-y-12 sm:grid-cols-2 sm:gap-y-16 p-4 ">
+        <ul role="list" className="grid  lg:grid-cols-3  w-full gap-12 md:grid-cols-2 md:max-w-5xl sm:grid-cols-1 sm:gap-y-16 p-4 sm:mx-auto ">
           {people.map((person) => (
             <div class=" flex flex-col mx-auto items-center text-gray-700 bg-white shadow-md bg-clip- rounded-xl max-w-70 overflow-hidden ">
               <div class=" mx-4 mt-4 overflow-hidden  text-gray-700 bg-white shadow-lg bg-clip- rounded-xl h-60 lg:max-w-[20vw]">
-                <img src={person.imageUrl} alt="profile-picture" />
+                <img src={person.imageUrl} className="object-contain" alt="profile-picture" />
               </div>
               <div class="p-6 text-center">
                 <h4 class="block mb-2 font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">

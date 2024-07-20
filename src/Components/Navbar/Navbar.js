@@ -233,8 +233,8 @@ export default function Nav() {
   return (
     <Navbar className="relative max-w-[100vw] z-300 py-2 ">
       <div className="flex  items-center justify-between text-blue-gray-900 ">
-        <Link to="/">
-        <div className="flex items-center  gap-1">
+        {/* <Link to="/"> */}
+        <div className="flex items-center  gap-1"  onClick={()=>{setOpenNav(false); navigate("/")}} >
           <img
             src={Alpha}
             alt=""
@@ -249,7 +249,7 @@ export default function Nav() {
             AlphaLearn
           </Typography>
         </div>
-            </Link>
+            {/* </Link> */}
 
         <div className="hidden items-center gap-x-2 lg:flex">
           <div className=" flex items-center  w-full gap-2 md:w-max">
@@ -303,9 +303,9 @@ export default function Nav() {
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
           {user && user._id ? (
             <Link to={`dashboard?user=${user.uniqueName}&tab=profile`}>
-              <div className="flex gap-2 items-center p-2">
+              <div className="flex gap-2 items-center p-2 " onClick={()=>setOpenNav(false)}>
 
-              <Person className="text-black" onClick={()=>setOpenNav(false)}/>
+              <Person className="text-black" />
                <span className="text-black text-md font-semibold"> Profile</span> 
               </div>
             </Link>

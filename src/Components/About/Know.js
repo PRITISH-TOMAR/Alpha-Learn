@@ -62,10 +62,10 @@ export default function Know() {
             We at < Highlight text={"Alpha_Learn"} /> promise to deliver the best of the Tech-Creations. The only we expect from our users is their beloved and forever support.We wish our developers and programmers a good coding journey ahead.
           </p>
         </div>
-        <div className="mx-auto mt-10 max-w-3xl lg:mx-0 lg:max-w-none">
-          <div className="grid grid-cols-1 mx-auto gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex  lg:min-w-[70vw] ">
+        <div className="mx-auto mt-10 lg:min-w-4xl lg:max-w-4xl w-full ">
+          <div className="grid grid-cols-1 w-full  mx-auto gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex  ">
             {links.map((link) => (
-              <div className="mx-auto">
+              <div className="mx-auto lg:w-[25%]  text-center">
 
                 <AnchorLink key={link.name} href={link.href}>
                   {link.name} <span aria-hidden="true">&rarr;</span>
@@ -73,9 +73,9 @@ export default function Know() {
               </div>
             ))}
           </div>
-          <dl className="grid grid-cols-1 mx-auto gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex  lg:min-w-[70vw] mt-8 text-center">
+          <dl className="grid grid-cols-1  mx-auto gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex   mt-8 text-center">
             {stats.map((stat) => (
-              <div key={stat.name} className="flex mx-auto flex-col-reverse">
+              <div key={stat.name} className="flex  mx-auto lg:w-[25%] flex-col-reverse ">
                 <dt className="text-base leading-7 text-gray-300">{stat.name}</dt>
                 <dd className="text-2xl font-bold leading-9 tracking-tight text-white">{stat.value}</dd>
               </div>

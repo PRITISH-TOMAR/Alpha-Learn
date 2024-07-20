@@ -130,12 +130,12 @@ export default function Comment({ artId }) {
   ///////////////////////////////////////////////////////////////
 
   return (
-    <div className='max-w-2xl mx-auto w-full p-3 bg-black'>
+    <div className='max-w-2xl mx-auto w-full p-1  md:p-3 bg-black'>
 
       {user && (
         <form
           onSubmit={handleSubmit}
-          className='border border-teal-500 rounded-md p-3'
+          className='md:border border-teal-500 rounded-md p-3'
         >
           <Textarea
             placeholder='Add a comment...'
