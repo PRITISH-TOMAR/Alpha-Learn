@@ -27,7 +27,7 @@ import { Modal, Spinner } from 'flowbite-react';
 function DateForm(dateString) {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
   const year = date.getFullYear();
 
   return `${day}/${month}/${year}`;
@@ -169,9 +169,9 @@ if(loading)
 
   return (
     <>
-      <div className="w-full bg-black rounded-lg shadow-lg p-4 flex flex-col items-center text-white">
+      <div className="w-full bg-black min-h-screen rounded-lg shadow-lg p-4 flex flex-col items-center text-white">
         {!articles.length ? (
-          <div className="min-w-full min-h-full gap-6 flex flex-col justify-center items-center">
+          <div className="min-w-full min-h-full gap-6 flex flex-col justify-center items-center text-center">
             <Typography variant="h4">Seems like you have no articles!</Typography>
             <Link to="/dashboard?tab=create">
               <Button variant="gradient" size="md">

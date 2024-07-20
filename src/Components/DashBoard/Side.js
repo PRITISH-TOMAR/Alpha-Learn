@@ -136,12 +136,12 @@ export default function Side() {
                 <Sidebar.Items className="flex justify-start items-start pt-2  ">
                   <Sidebar.ItemGroup className="flex flex-col  gap-1   items-start">
                     <Link to={usert._id === currUser._id ? `/dashboard?tab=profile` : `/dashboard?user=${usert.uniqueName}&tab=profile`}>
-                      <Sidebar.Item className=' hover:text-gray-900 text-gray-200  ' icon={HiUser} onClick={toggleSidebar} as='div'>
+                      <Sidebar.Item className=' hover:text-gray-900 text-gray-200  ' icon={HiUser} onClick={()=>{setMobileFiltersOpen(false);}} as='div'>
                         <p className=''>Profile</p>
                       </Sidebar.Item>
                     </Link>
                     <Link to={usert._id === currUser._id ? `/dashboard?tab=my-articles` : `/dashboard?user=${usert.uniqueName}&tab=my-articles`}>
-                      <Sidebar.Item icon={MdArticle} onClick={toggleSidebar} className='hover:text-gray-900  cursor-pointer text-gray-200  ' as='div'>
+                      <Sidebar.Item icon={MdArticle}  onClick={()=>{setMobileFiltersOpen(false);}} className='hover:text-gray-900  cursor-pointer text-gray-200  ' as='div'>
                         <p className=' lg:flex'> {currUser._id === usert._id && 'My '}Articles</p>
                       </Sidebar.Item>
                     </Link>
@@ -149,12 +149,12 @@ export default function Side() {
                     {usert && usert._id === currUser._id &&
                       <>
                         <Link to='/dashboard?tab=create'>
-                          <Sidebar.Item icon={MdEdit} onClick={toggleSidebar} className=' cursor-pointer' as='div'>
+                          <Sidebar.Item icon={MdEdit} onClick={()=>{setMobileFiltersOpen(false);}} className=' cursor-pointer' as='div'>
                             <p className=' lg:flex text-gray-200   hover:text-gray-900'>Write New</p>
                           </Sidebar.Item>
                         </Link>
                         <Link to=''>
-                          <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer' onClick={() => { Logout(); toggleSidebar() }} as='div'>
+                          <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer' onClick={() => { Logout(); setMobileFiltersOpen(false) }} as='div'>
                             <p className='hover:text-gray-900 lg:flex text-gray-200  '>SignOut</p>
                           </Sidebar.Item>
                         </Link>
