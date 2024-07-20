@@ -30,35 +30,9 @@ const DashBoard = () => {
   const dispatch = useDispatch()
   const  user  = useSelector((state) => state.user.user);
 
-  const Logout = async () => {
-    try {
-      const res = await axios.get(`${process.env.REACT_APP_API_END}logout`);
-      if(res.data.success){
-          toast.success(res.data.message);
-          dispatch(setUser({}));
-      navigate("/");
-      }
-      
-  } catch (error) {
-      console.log(error);
-  }
 
-  };
+  
 
-
-  useEffect(() => {
-
-    if(!user._id)
-    {
-      navigate("/")
-    }
-    const urlParams = new URLSearchParams(location.search);
-    const tabFromUrl = urlParams.get('tab');
- 
-    if (tabFromUrl) {
-      setTab(tabFromUrl);
-    }
-  }, [location.search]);
 
 
   return (
