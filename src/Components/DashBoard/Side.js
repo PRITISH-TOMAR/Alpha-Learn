@@ -176,7 +176,7 @@ export default function Side() {
       <Sidebar className=' min-w-[14vw] max-w-[14vw] lg:flex border-r rounded-r rounded-[15px] bg-gray-900 hidden'>
 
 <Sidebar.Items className="flex justify-center items-start pt-2  ">
-  <Sidebar.ItemGroup className="flex flex-col  ml-1 gap-1   items-start">
+  <Sidebar.ItemGroup className="flex flex-col  ml-1 gap-1   items-start ">
     <Link to={usert._id === currUser._id ? `/dashboard?tab=profile` : `/dashboard?user=${usert.uniqueName}&tab=profile`}>
       <Sidebar.Item className=' hover:text-gray-900 text-gray-200  ' icon={HiUser} onClick={toggleSidebar} as='div'>
         <p className=''>Profile</p>
@@ -191,13 +191,13 @@ export default function Side() {
     {usert && usert._id === currUser._id &&
       <>
         <Link to='/dashboard?tab=create'>
-          <Sidebar.Item icon={MdEdit} onClick={toggleSidebar} className=' cursor-pointer' as='div'>
-            <p className=' lg:flex text-gray-200   hover:text-gray-900'>Write New</p>
+          <Sidebar.Item icon={MdEdit} onClick={toggleSidebar} className=' cursor-pointer text-gray-200   hover:text-gray-900' as='div'>
+            <p className=' lg:flex '>Write New</p>
           </Sidebar.Item>
         </Link>
         <Link to=''>
-          <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer' onClick={() => { Logout(); toggleSidebar() }} as='div'>
-            <p className='hover:text-gray-900 lg:flex text-gray-200  '>SignOut</p>
+          <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer text-gray-200   hover:text-gray-900' onClick={() => { Logout(); toggleSidebar() }} as='div'>
+            <p className='lg:flex   '>SignOut</p>
           </Sidebar.Item>
         </Link>
       </>}
