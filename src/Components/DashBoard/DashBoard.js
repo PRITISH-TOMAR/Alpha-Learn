@@ -28,7 +28,7 @@ const DashBoard = () => {
   const [tab, setTab] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  // const  user  = useSelector((state) => state.user.user);
+  const  user  = useSelector((state) => state.user.user);
 
 
   
@@ -37,7 +37,7 @@ const DashBoard = () => {
 
     const urlParams = new URLSearchParams(location.search);
     const tabFromUrl = urlParams.get('tab');
- 
+    
     if (tabFromUrl) {
       setTab(tabFromUrl);
     }
