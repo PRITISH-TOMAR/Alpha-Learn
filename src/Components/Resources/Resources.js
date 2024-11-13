@@ -98,7 +98,7 @@ const Resources = () => {
 
         if (res.status) {
           setResult(res.data.resData)
-          // console.log(res.data.resData)
+          console.log(res)
           if (res.data.resData.length < 9) setShowMore(false);
           else setShowMore(true)
           setLoading(false)

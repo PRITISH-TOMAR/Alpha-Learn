@@ -119,7 +119,10 @@ export default function Signup() {
 
         if (res.data.success) {
           toast.success(res.data.message);
-          console.log(res.data.user)
+          // console.log(res.data)
+
+
+
           dispatch(setUser(res.data.user));
           // dispatch(setLoading(false));
           // navigate("/");
@@ -193,15 +196,17 @@ export default function Signup() {
 
     try {
 
-      setShowOtp(true)
+      
       const res = await axios.post(`${process.env.REACT_APP_EMAIL_END}send`, { email })
       if (res.status) {
+        setShowOtp(true)
         toast.success("OTP sent successfully")
       }
+      
 
     }
     catch {
-      toast.error("Recipient Unreachable")
+      toast.error("Email Already Exists!")
     }
   }
 

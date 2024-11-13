@@ -20,7 +20,7 @@ const Profile = () => {
 
     const logoutHandler = async () => {
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_END}logout`);
+            const res = await axios.get(`${process.env.REACT_APP_API_END}logout`, {withCredentials:true});
             if(res.data.success){
                 toast.success(res.data.message);
                 dispatch(setUser({}));
@@ -30,6 +30,8 @@ const Profile = () => {
         } catch (error) {
             console.log(error);
         }
+
+       
     }
 
 

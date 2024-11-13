@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -32,7 +32,7 @@ const truncateContent = (htmlString, wordLimit) => {
 
 function RandomCard( {home}) {
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const [articles, setArticles] = React.useState([]);
   const navigate= useNavigate()
 

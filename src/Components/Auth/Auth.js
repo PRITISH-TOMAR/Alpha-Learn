@@ -12,7 +12,7 @@ export default function Auth() {
     const auth = getAuth(app)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
 
     function updateUrl() {
@@ -32,7 +32,7 @@ export default function Auth() {
             navigate("/")
         }
     }
-///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
 
     const handleGoogleClick = async () => {
@@ -50,7 +50,7 @@ export default function Auth() {
                 withCredentials: true
 
             });
-            // console.log(res.data.success)
+            // console.log(res.data)
             if (res.data.success) {
                 toast.success(res.data.message);
                 // console.log(res.data.user)
@@ -90,4 +90,4 @@ export default function Auth() {
             </Button>
         </>
     )
-}
+} 

@@ -223,11 +223,7 @@ const NewArticle = () => {
         <Button type='submit' color='green' disabled={done} className='md:mt-0 mt-7  self-center w-[300px] max-w-full '>
           Publish
         </Button>
-        {/* {publishError && (
-          <Alert className='mt-5' color='failure'>
-            {publishError}
-          </Alert>
-        )} */}
+      
 
       </form>
     </div>

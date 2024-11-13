@@ -17,7 +17,7 @@ export default function Comment({ artId }) {
   const [liked, setLiked] = useState(false);
   const navigate = useNavigate();
 
-///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(process.env.REACT_APP_COMMENT_END)
@@ -48,7 +48,7 @@ export default function Comment({ artId }) {
       setCommentError(error.message);
     }
   };
-///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
 
   useEffect(() => {
     const getComments = async () => {
